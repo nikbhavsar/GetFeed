@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { setAlert } from '../../actions/alert';
+import { Link, Redirect } from 'react-router-dom';
 
-const Register = ({ setAlert }) => {
+import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
+
+const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,12 +19,20 @@ const Register = ({ setAlert }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setAlert('Password does not match', 'danger');
+    register(formData);
     console.log('success');
   };
 
+  //Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
+
   return (
     <div className='signup-login-container'>
+      <Link to='/login' className='round-button redirect-button'>
+        Login
+      </Link>
       <div className='form-section'>
         <div className='form-container'>
           {' '}
@@ -39,7 +48,6 @@ const Register = ({ setAlert }) => {
               id='name'
               value={name}
               onChange={(e) => onChange(e)}
-              required
             />
 
             <label className='txt-field-label' for='email'>
@@ -72,6 +80,7 @@ const Register = ({ setAlert }) => {
                 type='checkbox'
                 id='agree-checkbox'
                 name='agree-checkbox'
+                required
               />
               <label for='agree-checkbox' className='checkbox-label'>
                 {' '}
@@ -84,13 +93,13 @@ const Register = ({ setAlert }) => {
           </form>
         </div>
       </div>
-      <div className='image-section'>
-        <Link to='/login' className='round-button redirect-button'>
-          Login
-        </Link>
-      </div>
+      <div className='image-section'></div>
     </div>
   );
 };
 
-export default connect(null, { setAlert })(Register);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, register })(Register);

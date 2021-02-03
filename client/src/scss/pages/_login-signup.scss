@@ -8,7 +8,7 @@
   flex:53%;
   justify-content: center;
   align-items: center;
-  background-color: #fdfdff;
+  background-color: #FCFDFE;
 }
 
 .image-section{
@@ -88,14 +88,68 @@ input[type=text],input[type=password],input[type='email']{
   font-weight: bold;
   text-decoration: none;
   position: fixed;
-  top:40px;
-  right:60px;
+  top:15px;
+  right:40px;
   transition: all 0.3s ease-in-out;
 }
 
 .redirect-button:hover{
-  background-color: black;
-  border: black solid 2px;
+  background-color: rgba(37, 35, 35, 0.726);
+  border: #C5C6CB solid 2px;
   transition: all 0.3s ease-in-out;
   box-shadow: 5px 5px 8px grey;
+}
+
+//Media Queries
+
+@media (max-width: 768px){
+  .form-section {
+   
+   background-color: rgba(17, 17, 17, 0.301);
+    margin: auto auto; 
+    border-radius: 5px;
+    box-shadow: 0 0 10px #000;
+  
+  }
+
+  .form-container{
+    background-color: rgba(5, 5, 5, 0.692);
+    padding: 20px;
+    border-radius: 20px;
+   
+  }
+
+  
+  .form-section:before {
+    background-image: url("../../img/signup_background.png");
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    content: "";
+    position: fixed;
+    background-position: center;
+    background-attachment: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    display: block;
+    //filter: blur(1px);
+  }
+  .image-section{
+    display: none;
+  }
+  .tagline, .txt-field-label{
+    color:whitesmoke;
+  }
+
+  .submit-button:hover{
+    background-color: whitesmoke;
+  }
+
+  .submit-button{
+    background-color: transparent;
+    border: white solid 1px;
+  }
 }

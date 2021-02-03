@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from '../../actions/auth';
 
-const Login = () => {
+const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,56 +17,67 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log('success');
+    login(email, password);
   };
 
+  //Redirect if logged in
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  }
   return (
     <div>
       <div className='signup-login-container'>
+        <Link to='/' className='round-button redirect-button'>
+          signup
+        </Link>
         <div className='form-section'>
           <div className='form-container'>
             {' '}
             <form className='signup-login-form' onSubmit={(e) => onSubmit(e)}>
               <h1 className='tagline'>Log In</h1>
-              <label className='txt-field-label' for='email'>
-                <b>Email Address</b>
-              </label>
-              <input
-                type='email'
-                placeholder='Enter Email'
-                name='email'
-                id='email'
-                value={email}
-                onChange={(e) => onChange(e)}
-                required
-              />
+              <div>
+                <label className='txt-field-label' for='email'>
+                  <b>Email Address</b>
+                </label>
+                <input
+                  type='email'
+                  placeholder='Enter Email'
+                  name='email'
+                  id='email'
+                  value={email}
+                  onChange={(e) => onChange(e)}
+                  required
+                />
+              </div>
 
-              <label className='txt-field-label' for='password'>
-                <b>Password</b>
-              </label>
-              <input
-                type='password'
-                placeholder='Enter Password'
-                name='password'
-                id='password'
-                value={password}
-                onChange={(e) => onChange(e)}
-                required
-              />
+              <div>
+                <label className='txt-field-label' for='password'>
+                  <b>Password</b>
+                </label>
+                <input
+                  type='password'
+                  placeholder='Enter Password'
+                  name='password'
+                  id='password'
+                  value={password}
+                  onChange={(e) => onChange(e)}
+                  required
+                />
+              </div>
               <button type='submit' className='round-button submit-button'>
                 Login
               </button>
             </form>
           </div>
         </div>
-        <div className='image-section'>
-          <Link to='/' className='round-button redirect-button'>
-            signup
-          </Link>
-        </div>
+        <div className='image-section'></div>
       </div>
     </div>
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { login })(Login);

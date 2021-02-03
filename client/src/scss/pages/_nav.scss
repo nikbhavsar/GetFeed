@@ -1,0 +1,159 @@
+.navbar {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  color: #333;
+  position: absolute;
+//  padding: 10px;
+  top: 0;
+  left: 0;
+  box-shadow: 1px 0px 8px grey;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.brandTitle {
+  font-size: 1.5rem;
+  margin: .5rem
+}
+
+.navbarLinks ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navbarLinks li {
+  list-style: none;
+}
+
+.navbarLinks li a {
+  text-decoration: none;
+  color: #333;
+  font-size: $sm-font;
+  font-weight: bold;
+  padding: 1.6rem;
+  display: block;
+}
+
+.navbarLinks li:hover {
+  background-color: #555;
+}
+
+/*Burger-Menu Animation*/
+.navbarToggler {
+  display: none;
+  border: none;
+  background: transparent !important;
+  align-items: center;
+  margin: .5rem
+}
+
+.navbarToggler:focus {
+  outline: none;
+  background: transparent !important;
+}
+
+.navbarToggler .iconBar {
+  background-color: #333;
+  transform: rotate(0deg) translate(0px, 0px);
+  transition: ease all .2s;
+}
+
+.navbarToggler .iconBar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.navbarToggler .iconBar+.iconBar {
+  margin-top: 4px;
+}
+
+.iconBar:nth-child(2) {
+  width: 16px;
+  transition: ease all .2s;
+}
+
+.navbarToggler:hover>.iconBar:nth-child(2) {
+  width: 22px;
+  transition: ease all .2s;
+}
+
+.navbarToggler:active>.iconBar:nth-child(2) {
+  width: 22px;
+  transition: ease all .2s;
+}
+
+.navbarToggler.active .iconBar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 4px);
+  transition: ease all .2s;
+}
+
+.navbarToggler.active .iconBar:nth-child(2) {
+  opacity: 0;
+  transition: ease all .2s;
+}
+
+.navbarToggler.active .iconBar:nth-child(3) {
+  transform: rotate(-45deg) translate(4px, -4px);
+  transition: ease all .2s;
+}
+
+
+/*END Burger-Menu Animation*/
+
+@media(max-width: 767px) {
+  .navbarToggler {
+      display: block;
+  }
+
+  .bar:nth-child(2) {
+      width: 16px;
+      transition: ease all .2s;
+    }
+
+    .toggleButton:hover>.bar:nth-child(2) {
+      width: 22px;
+      transition: ease all .2s;
+    }
+    
+  .navbarLinks {
+      display: flex;
+      width: 100%;
+  }
+
+  .navbar {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .navbarLinks ul {
+      width: 100%;
+      flex-direction: column;
+  }
+
+  .navbarLinks li {
+      text-align: center;
+  }
+
+  .navbarLinks li a {
+      padding: 1rem 1rem;
+      font-size: 18px;
+  }
+
+  .navbarLinks.collapse {
+      display: none;
+  }
+
+}
