@@ -1,0 +1,155 @@
+.signup-login-container{
+  height: 100vh;
+  display: flex;
+}
+.form-section{
+  display: flex;
+  height: 100vh;
+  flex:53%;
+  justify-content: center;
+  align-items: center;
+  background-color: #FCFDFE;
+}
+
+.image-section{
+  flex:47%;
+  background-image: url('../../img/signup_background.png');
+  background-position: right; 
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment:inherit;
+  
+}
+
+.form-container{
+display: flex;
+justify-content: center;
+align-items: center;
+width: 60%;
+}
+
+input[type=text],input[type=password],input[type='email']{
+  padding: 15px 12px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 5px 0 20px 0;
+  border: lightgray solid 1px;
+  border-radius: 5px; 
+  outline: none;
+}
+
+#agree-checkbox{
+  border-radius: 30px;
+}
+
+
+.txt-field-label{
+  text-transform: uppercase;
+  font-size: $sm-font;
+  color:#cccfd8;
+  font-weight: 600;
+}
+
+.checkbox-label{
+  font-size: $sm-font;
+  color: #cccfd8;
+ // font-weight: bold;
+  span{
+    color:black;
+  }
+}
+
+.tagline{
+  font-size: $xlg-font;
+  font-weight: 400;
+  margin-bottom:28px;
+}
+
+.submit-button{
+  color: white;
+  background-color: black;
+  border: none;
+  margin-top: 30px;
+  transition: all 0.3s ease-in-out;
+}
+
+.submit-button:hover{
+  background-color: transparent;
+  color: black;
+  border: black solid 1px;
+  box-shadow: 5px 5px 15px grey;
+  transition: all 0.3s ease-in-out;
+}
+
+.redirect-button{
+  background-color: transparent;
+  border: white solid 2px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  position: fixed;
+  top:15px;
+  right:40px;
+  transition: all 0.3s ease-in-out;
+}
+
+.redirect-button:hover{
+  background-color: rgba(37, 35, 35, 0.726);
+  border: #C5C6CB solid 2px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 5px 5px 8px grey;
+}
+
+//Media Queries
+
+@media (max-width: 768px){
+  .form-section {
+   
+   background-color: rgba(17, 17, 17, 0.301);
+    margin: auto auto; 
+    border-radius: 5px;
+    box-shadow: 0 0 10px #000;
+  
+  }
+
+  .form-container{
+    background-color: rgba(5, 5, 5, 0.692);
+    padding: 20px;
+    border-radius: 20px;
+   
+  }
+
+  
+  .form-section:before {
+    background-image: url("../../img/signup_background.png");
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    content: "";
+    position: fixed;
+    background-position: center;
+    background-attachment: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    display: block;
+    //filter: blur(1px);
+  }
+  .image-section{
+    display: none;
+  }
+  .tagline, .txt-field-label{
+    color:whitesmoke;
+  }
+
+  .submit-button:hover{
+    background-color: whitesmoke;
+  }
+
+  .submit-button{
+    background-color: transparent;
+    border: white solid 1px;
+  }
+}

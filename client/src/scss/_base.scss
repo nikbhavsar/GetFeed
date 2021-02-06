@@ -1,0 +1,14 @@
+body{
+  font-family: 'Source Sans Pro', sans-serif;
+}
+.round-button{
+  border-radius: 40px;
+  padding: 14px 40px;
+  font-size: $sm-font;
+  text-decoration: none;
+  outline: none;
+  text-transform: uppercase;
+}
+.round-button:hover{
+  cursor: pointer;
+}
