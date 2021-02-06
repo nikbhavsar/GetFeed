@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import { logout } from '../../actions/auth';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isClicked, setIsClicked] = useState(true);
 
-  const handleClick = (e) => {
-    setIsClicked(!isClicked);
+  const handleClick = () => {
+    setIsClicked((prevState) => !prevState);
   };
 
   if (isAuthenticated) {
@@ -18,26 +18,26 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         <a
           href='#'
           className={'navbarToggler ' + (isClicked ? 'active' : null)}
-          onClick={(e) => handleClick(e)}>
+          onClick={handleClick}>
           <span className='iconBar'></span>
           <span className='iconBar'></span>
           <span className='iconBar'></span>
         </a>
         <div className={'navbarLinks ' + (isClicked ? null : 'collapse')}>
           <ul>
-            <li onClick={(e) => handleClick(e)}>
+            <li onClick={handleClick}>
               <a href='#'>Friends</a>
             </li>
-            <li onClick={(e) => handleClick(e)}>
+            <li onClick={handleClick}>
               <a href='#'>Friends Polls</a>
             </li>
-            <li onClick={(e) => handleClick(e)}>
+            <li onClick={handleClick}>
               <a href='#'>Opinions</a>
             </li>
-            <li onClick={(e) => handleClick(e)}>
+            <li onClick={handleClick}>
               <a href='#'>Create Poll</a>
             </li>
-            <li onClick={(e) => handleClick(e)}>
+            <li onClick={handleClick}>
               <Link to='/' onClick={logout}>
                 Logout
               </Link>

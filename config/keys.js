@@ -1,5 +1,7 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 module.exports = {
-  mongoURI:
-    'mongodb+srv://nikhar:nikharHatchways@getfeeds.zhyfw.mongodb.net/test?retryWrites=true&w=majority',
-  jwtSecreat: 'getfeedtoken',
+  mongoURI: process.env.MONGO_URI,
+  jwtSecreat: process.env.JWT_SECREAT,
 };
