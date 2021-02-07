@@ -7,6 +7,8 @@ import AlertDiv from './components/AlertDiv';
 import './scss/styles.scss';
 import Navbar from './components/layout/Navbar';
 import setAuthToken from './utils/setAuthToken';
+import Dashboard from './components/layout/Dashboard';
+import PrivateRoute from './components/routing/PrivateRoute';
 
 //Redux imports
 
@@ -31,6 +33,7 @@ const App = () => {
           <Route exact path='/' component={Register} />
           <Switch>
             <Route exact path='/login' component={Login} />{' '}
+            <PrivateRoute exact path='/dashboard' component={Dashboard} />
           </Switch>
         </Fragment>
       </Router>

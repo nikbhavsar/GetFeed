@@ -1,16 +1,22 @@
+.nav-container{
+  width: 90%;
+}
 .navbar {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  min-height: 4.5rem;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
   color: #333;
   position: absolute;
-//  padding: 10px;
   top: 0;
   left: 0;
   box-shadow: 1px 0px 8px grey;
+
+  
+
 }
 
 .avatar {
@@ -25,27 +31,35 @@
   margin: .5rem
 }
 
-.navbarLinks ul {
-  margin: 0;
-  padding: 0;
+.navbarLinks .nav-items-ul {
+  margin-left:1rem;
   display: flex;
+  align-items: center;
+}
+
+.create-poll{
+  border: rgba(140, 136, 136, 0.26) solid 1px;
+  padding-left: 20px;
+  padding-right: 20px;
+ //cc display: inline-block;
 }
 
 .navbarLinks li {
   list-style: none;
+ 
 }
 
 .navbarLinks li a {
   text-decoration: none;
   color: #333;
-  font-size: $sm-font;
+  font-size: 0.85rem;
   font-weight: bold;
-  padding: 1.6rem;
-  display: block;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  display: inline-block;
 }
 
 .navbarLinks li:hover {
-  background-color: #555;
 }
 
 /*Burger-Menu Animation*/
@@ -107,6 +121,14 @@
 .navbarToggler.active .iconBar:nth-child(3) {
   transform: rotate(-45deg) translate(4px, -4px);
   transition: ease all .2s;
+}
+
+.create-poll{
+  display: inline-block;
+}
+
+.avtar{
+  margin-right: 2rem;
 }
 
 
