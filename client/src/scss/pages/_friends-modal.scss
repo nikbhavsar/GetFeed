@@ -1,0 +1,19 @@
+.modal{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.paper{
+  background-color: white;
+  -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+
+}
+
+
+.tab-panel{
+  overflow-y: auto;
+  max-height: 80vh;
+  min-height: 50vh;
+}

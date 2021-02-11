@@ -11,6 +11,8 @@ import {
   LOGOUT,
 } from './types';
 
+import { createProfile } from './profile';
+
 //Load user
 
 export const loadUser = () => async (dispatch) => {
@@ -78,6 +80,7 @@ export const register = ({ name, email, password }) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(loadUser());
+    dispatch(createProfile());
   } catch (err) {
     console.error(err);
     const errors = err.response.data.errors;

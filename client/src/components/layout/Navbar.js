@@ -12,14 +12,20 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
+import { Button } from '@material-ui/core';
+import FriendsModal from './FriendsModal';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const [open, setOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = React.useState(false);
+
   const anchorRef = React.useRef(null);
 
   const history = createBrowserHistory();
+
+  //Avtar Menu functios
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -46,12 +52,20 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     if (prevOpen.current === true && open === false) {
       anchorRef.current.focus();
     }
-
     prevOpen.current = open;
   }, [open]);
 
   const handleClick = (e) => {
     setIsClicked(!isClicked);
+  };
+
+  //Modal Open and Click function
+
+  const handleButtonClickOpen = () => {
+    setModalOpen(true);
+  };
+  const handleModalClose = () => {
+    setModalOpen(false);
   };
 
   if (isAuthenticated) {
@@ -70,7 +84,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           <div className={'navbarLinks ' + (isClicked ? null : 'collapse')}>
             <ul className='nav-items-ul'>
               <li onClick={(e) => handleClick(e)}>
-                <a href='#'>Friends</a>
+                <button onClick={handleButtonClickOpen}>Friends</button>
               </li>
               <li onClick={(e) => handleClick(e)}>
                 <a href='#'>Friends Polls</a>
@@ -135,6 +149,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
             </ul>
           </div>
         </nav>
+        <FriendsModal open={modalOpen} onClose={handleModalClose} />
       </div>
     );
   } else {

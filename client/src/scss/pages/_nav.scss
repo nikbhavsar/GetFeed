@@ -1,6 +1,4 @@
-.nav-container{
-  width: 90%;
-}
+
 .navbar {
   display: flex;
   width: 100%;
@@ -10,9 +8,7 @@
   align-items: center;
   background-color: #fff;
   color: #333;
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: sticky;
   box-shadow: 1px 0px 8px grey;
 
   
@@ -57,9 +53,23 @@
   margin-left: 1.5rem;
   margin-right: 1.5rem;
   display: inline-block;
+  
 }
 
-.navbarLinks li:hover {
+.navbarLinks li button{
+  text-decoration: none;
+  color: #333;
+  font-size: 0.75rem;
+  font-weight: bold;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  display: inline-block;
+  background: transparent;
+  border: none;
+}
+
+.navbarLinks li button:hover {
+  cursor: pointer;
 }
 
 /*Burger-Menu Animation*/
