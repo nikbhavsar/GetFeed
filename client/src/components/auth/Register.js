@@ -4,8 +4,9 @@ import { Link, Redirect } from 'react-router-dom';
 
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
+import { createProfile } from '../../actions/profile';
 
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Register = ({ setAlert, register, isAuthenticated, createProfile }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -102,4 +103,6 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { setAlert, register })(Register);
+export default connect(mapStateToProps, { setAlert, register, createProfile })(
+  Register
+);

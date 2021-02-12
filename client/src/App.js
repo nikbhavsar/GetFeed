@@ -7,12 +7,16 @@ import AlertDiv from './components/AlertDiv';
 import './scss/styles.scss';
 import Navbar from './components/layout/Navbar';
 import setAuthToken from './utils/setAuthToken';
+import Dashboard from './components/layout/Dashboard';
+import PrivateRoute from './components/routing/PrivateRoute';
 
 //Redux imports
 
 import { Provider } from 'react-redux';
-import store from './store';
+import { store, persistor } from './store';
 import { loadUser } from './actions/auth';
+import Profiles from './components/profile/Profiles';
+import { PersistGate } from 'redux-persist/integration/react';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -24,16 +28,21 @@ const App = () => {
   }, []);
   return (
     <Provider store={store}>
-      <Router>
-        <Fragment>
-          <Navbar></Navbar>
-          <AlertDiv />
-          <Route exact path='/' component={Register} />
-          <Switch>
-            <Route exact path='/login' component={Login} />{' '}
-          </Switch>
-        </Fragment>
-      </Router>
+      <PersistGate loading={null} persistor={persistor}>
+        {' '}
+        <Router>
+          <Fragment>
+            <Navbar></Navbar>
+            <AlertDiv />
+            <Route exact path='/' component={Register} />
+            <Switch>
+              <Route exact path='/login' component={Login} />{' '}
+              <PrivateRoute exact path='/friends' component={Profiles} />
+              <PrivateRoute exact path='/dashboard' component={Dashboard} />
+            </Switch>
+          </Fragment>
+        </Router>
+      </PersistGate>
     </Provider>
   );
 };

@@ -17,7 +17,11 @@ const db = require('./config/keys').mongoURI;
 
 // Connect to MongoDB
 mongoose
-  .connect(db, { useNewUrlParser: true, useCreateIndex: true })
+  .connect(db, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
   .then(() => console.log('MongoDB successfully connected'))
   .catch((err) => console.log(err));
 
@@ -28,6 +32,8 @@ app.get('/', (req, res) => res.send('API Running'));
 app.use('/api/users', require('./routes/api/users'));
 
 app.use('/api/auth', require('./routes/api/auth'));
+
+app.use('/api/profile', require('./routes/api/profile'));
 
 const PORT = process.env.PORT || 5000;
 
