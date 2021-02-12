@@ -26,9 +26,7 @@ const Profiles = ({
   return loading || profiles === [] || profile === null ? (
     <Spinner />
   ) : (
-    <Fragment>
-      <Search allProfile={allProfile} profile={profile} />
-    </Fragment>
+    <Search allProfile={allProfile} profile={profile} />
   );
 };
 

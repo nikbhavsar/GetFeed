@@ -1,10 +1,6 @@
-import { MongooseDocument } from 'mongoose';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
 import { logout } from '../../actions/auth';
-import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
@@ -12,7 +8,6 @@ import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
-import { Button } from '@material-ui/core';
 import FriendsModal from './FriendsModal';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
@@ -22,8 +17,6 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const [modalOpen, setModalOpen] = React.useState(false);
 
   const anchorRef = React.useRef(null);
-
-  const history = createBrowserHistory();
 
   //Avtar Menu functios
 

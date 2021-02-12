@@ -8,8 +8,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Profiles from '../profile/Profiles';
-import Followers from '../profile/Followers';
-import Following from '../profile/Following';
+import FollowType from '../profile/FollowType';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -100,14 +99,14 @@ export default function FullWidthTabs() {
           value={value}
           index={1}
           dir={theme.direction}>
-          <Followers />
+          <FollowType followType='followers' />
         </TabPanel>
         <TabPanel
           className='tab-panel'
           value={value}
           index={2}
           dir={theme.direction}>
-          <Following />
+          <FollowType followType='following' />
         </TabPanel>
       </SwipeableViews>
     </div>

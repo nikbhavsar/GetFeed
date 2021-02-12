@@ -1,8 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { followUser, unFollowUser } from '../../actions/profile';
-import { Button } from '@material-ui/core';
 
 const ProfileItem = ({
   profile: {
@@ -15,10 +13,7 @@ const ProfileItem = ({
   return (
     <div className='profile bg-light'>
       <div className='profile-item'>
-        <div className='avtar-name-section'>
-          {' '}
-          <h2>{name}</h2>
-        </div>
+        <div className='avatar-name-section'> {name}</div>
 
         <div className='follow-unfollow-button-section'>
           {' '}

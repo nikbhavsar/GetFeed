@@ -7,10 +7,7 @@ const Search = (props) => {
   const [result, setResult] = useState('');
 
   useEffect(() => {
-    console.log();
     const results = props.allProfile.filter((userProfile) => {
-      console.log(userProfile.user.name);
-      console.log(result);
       return userProfile.user.name.toLowerCase().includes(result);
     });
 
@@ -26,7 +23,7 @@ const Search = (props) => {
     <div>
       <input
         type='text'
-        placeholder='serch here ..'
+        placeholder='search here ..'
         value={result}
         onChange={onChange}
       />
@@ -43,7 +40,7 @@ const Search = (props) => {
               )
           )
         ) : (
-          <h4>No profiles found</h4>
+          <div>No profiles found</div>
         )}
       </div>
     </div>

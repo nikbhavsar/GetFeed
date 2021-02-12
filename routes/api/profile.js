@@ -41,7 +41,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 //@route GET api/profile/:user_id
-//@desc Get user profile bu user Id
+//@desc Get user profile by user Id
 //@access Public
 
 router.get('/user/:user_id', async (req, res) => {
