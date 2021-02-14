@@ -6,6 +6,7 @@ const ProfileSchema = new mongoose.Schema({
   },
   followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
   following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
+  categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'category' }],
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);
