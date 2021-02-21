@@ -2,8 +2,8 @@ const express = require('express');
 const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 const router = express.Router();
-const User = require('../../modals/User');
 const Category = require('../../modals/Category');
+const Profile = require('../../modals/Profile');
 
 //@route GET api/category/:Category_id
 //@desc get category by id
@@ -12,7 +12,7 @@ router.get('/:category_id', auth, async (req, res) => {
   try {
     const category = await Category.findOne({
       _id: req.params.category_id,
-    });
+    }).populate('friends.user');
     if (!category) {
       return res.status(400).json({ msg: 'Category not found.' });
     }
@@ -42,12 +42,12 @@ router.post(
     const { category_name, friends } = req.body;
 
     //Building object
-    const profileFields = {};
-    if (category_name) profileFields.category_name = category_name;
-    if (friends) profileFields.friends = friends;
+    const categoryFields = {};
+    if (category_name) categoryFields.category_name = category_name;
+    if (friends) categoryFields.friends = friends;
 
     try {
-      let category = Category(profileFields);
+      let category = Category(categoryFields);
       await category.save();
       await Profile.findOneAndUpdate(
         { user: req.user.id },
@@ -62,7 +62,30 @@ router.post(
   }
 );
 
-//@route PUT api/category
+//@route DELETE api/category
+//@desc Delete category
+//@access Private
+
+router.delete('/delete-category', auth, async (req, res) => {
+  try {
+    const category = await Category.findOneAndDelete({
+      _id: req.body.categoryId,
+    });
+
+    await Profile.findOneAndUpdate(
+      { user: req.user.id },
+      { $pull: { categories: req.body.categoryId } },
+      { new: true }
+    );
+
+    res.json(category);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//@route PUT api/category/add-friends
 //@desc add users to friends list for category
 //@access Private
 
@@ -73,6 +96,33 @@ router.put('/add-friends', auth, async (req, res) => {
       { $push: { friends: req.body.userId } },
       { new: true }
     );
+
+    res.json(category);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//@route PUT api/category/remove-friends
+//@desc add users to friends list for category
+//@access Private
+
+router.put('/remove-friends', auth, async (req, res) => {
+  try {
+    const category = await Category.findOneAndUpdate(
+      { _id: req.body.categoryId },
+      { $pull: { friends: req.body.userId } },
+      { new: true }
+    );
+
+    if (category.friends.length === 0) {
+      await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $pull: { categories: req.body.categoryId } },
+        { new: true }
+      );
+    }
 
     res.json(category);
   } catch (err) {

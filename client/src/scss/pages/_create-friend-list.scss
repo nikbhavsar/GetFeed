@@ -1,0 +1,132 @@
+.create-friends-list-container {
+  min-width: 30vw;
+  min-height: 60vh;
+  padding: 1rem;
+  text-align: center;
+}
+
+.create-friends-list-container__heading {
+  font-size: $lg-font;
+  margin-bottom: $lg-font;
+}
+
+.friends-list-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.add-remove-button {
+  background-color: #62cd4d;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+}
+//Friends list compomponent styles
+
+.card-section {
+  display: flex;
+  flex-direction: row;
+  max-width: 70vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-list {
+  display: flex;
+  max-width: 58vw;
+  overflow-x: auto;
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.card-list::-webkit-scrollbar {
+  display: none;
+}
+
+.arrow {
+  border: solid rgb(129, 128, 128);
+  border-width: 0 5px 5px 0;
+  display: inline-block;
+  padding: 5px;
+  margin: 1rem;
+  cursor: pointer;
+}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+//Friends list item Styles
+.category-container {
+  flex-grow: 0;
+  flex-shrink: 0;
+  background-color: #fdfdfd;
+  border: rgb(223, 220, 220) solid 1px;
+  border-radius: 5px;
+  margin: 0.6rem 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 0 5px rgba(80, 80, 80, 0.1) inset;
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 0 5px rgba(85, 85, 85, 0.1) inset;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 5px rgba(80, 79, 79, 0.1) inset;
+}
+
+.category-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 18vw;
+  border-bottom: rgb(211, 208, 208) solid 1px;
+  padding: $sm-font;
+  margin-bottom: 5px;
+}
+
+.setting-icon {
+  color: rgb(180, 178, 178);
+  cursor: pointer;
+}
+
+.friends-list {
+  height: 8rem;
+  overflow: auto;
+}
+
+.friends-list_list-item {
+  display: flex;
+  align-items: center;
+}
+
+.clear-icon {
+  color: rgb(180, 178, 178);
+  cursor: pointer;
+  font-size: $sm-font !important;
+  padding-left: $sm-font;
+}
+
+.friends-list_list-item__name {
+  padding: 10px 1rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.category-name__friends-count {
+  font-size: 0.9rem;
+  color: gray;
+  font-weight: lighter;
+}
+
+.category-name__name {
+  font-size: 1.3rem;
+  margin-bottom: 5px;
+}

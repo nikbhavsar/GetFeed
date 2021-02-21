@@ -121,7 +121,6 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                             autoFocusItem={open}
                             id='menu-list-grow'
                             onKeyDown={handleListKeyDown}>
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
                             <MenuItem onClick={handleClose}>
                               My account
                             </MenuItem>

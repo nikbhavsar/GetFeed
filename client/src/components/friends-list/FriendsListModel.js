@@ -2,9 +2,9 @@ import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import FullWidthTabs from './Tabs';
+import CreateFriendsList from './CreateFriendsList';
 
-export default function FriendsModal({ open, onClose }) {
+export default function FriendsListModal({ open, onClose }) {
   return (
     <div>
       <Modal
@@ -20,7 +20,7 @@ export default function FriendsModal({ open, onClose }) {
         }}>
         <Fade in={open}>
           <div className='paper'>
-            <FullWidthTabs />
+            <CreateFriendsList onClose={onClose} />
           </div>
         </Fade>
       </Modal>

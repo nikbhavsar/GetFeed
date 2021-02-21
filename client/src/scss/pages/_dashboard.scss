@@ -1,3 +1,69 @@
-.name{
+.name {
   margin-bottom: 2rem;
+}
+.dashboard {
+  display: flex;
+  min-height: 95vh;
+  max-width: 100%;
+}
+.friends-section {
+  flex-basis: 18%;
+  flex-shrink: 0;
+  flex-grow: 0;
+  padding: 2rem;
+}
+.friends-list-poll-section {
+  flex-basis: 71.7%;
+  flex-shrink: 0;
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f8;
+  padding: 1rem 2rem;
+}
+
+.friend-section {
+  flex: 50%;
+}
+.poll-section {
+  flex: 50%;
+}
+
+.not-found {
+  padding: 3rem;
+  font-size: $lg-font;
+  font-weight: bold;
+  color: rgb(165, 164, 164);
+}
+
+//Friends and poll section styles
+
+.create-section {
+  display: flex;
+  justify-content: space-between;
+  max-width: 70vw;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.create-section__heading {
+  font-size: $md-font;
+  font-weight: 700;
+}
+.create-section__button {
+  font-size: 0.7rem;
+  padding: 12px 25px;
+  border: rgb(196, 196, 196) solid 1px;
+  font-weight: 700;
+}
+
+//Friends Section styles
+
+.profile-name {
+  margin-bottom: 10px;
+}
+
+.profiles__heading {
+  margin-bottom: 15px;
+  font-size: $md-font;
+  font-weight: bold;
 }

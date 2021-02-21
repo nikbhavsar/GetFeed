@@ -23,7 +23,6 @@ const FollowType = ({
             userProfile.user._id !== profile.user._id
         )
       );
-      console.log(followType);
     }
   }, [getProfiles]);
 
