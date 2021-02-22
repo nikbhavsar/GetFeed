@@ -19,11 +19,12 @@ const FriendsListsSectionItem = ({
 }) => {
   const [categoryItem, setcategoryItem] = useState({});
   const [friends, setFriends] = useState([]);
-
+  const [, forceUpdate] = useReducer((x) => x + 1, 0);
   useEffect(async () => {
     //Get the category by Id
     try {
       const res = await axios.get(`/api/category/${category_id}`);
+      console.log(res.data);
 
       if (res.data) {
         setcategoryItem(res.data);
@@ -59,8 +60,8 @@ const FriendsListsSectionItem = ({
         <div className='category-info__settings-symbol'>
           <DeleteRoundedIcon
             onClick={(e) => {
-              //  handleCardDelete(category_id);
               deleteCategory(category_id);
+              window.location.reload();
             }}
             className='setting-icon'
           />

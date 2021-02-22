@@ -15,9 +15,7 @@ const FriendsListSection = ({
   const [modalOpen, setModalOpen] = React.useState(false);
   const [categories, setCategories] = useState([]);
 
-  //Setting state for Getting data fro FriendListSectionItem component
-
-  // const [itemDeleted, setItemDeleted] = useState(null);
+  //Getting data fro FriendListSectionItem component
 
   useEffect(() => {
     if (profile !== null) {
@@ -61,18 +59,6 @@ const FriendsListSection = ({
     console.log(container.offsetWidth);
   };
 
-  // //Getting data fro FriendListSectionItem component
-
-  // const handleCardDelete = (categoryId) => {
-  //   console.log(categoryId);
-  //   setCategories(
-  //     categories.filter((category) => {
-  //       console.log(category);
-  //       return category !== categoryId;
-  //     })
-  //   );
-  // };
-
   return (
     <>
       <div className='create-section'>
@@ -85,7 +71,7 @@ const FriendsListSection = ({
       </div>
       <div className='card-section'>
         {profile !== null ? (
-          categories.length ? (
+          categories.length >= 1 ? (
             <>
               <div class='arrow left' onClick={prevScroll}></div>
               <div className='card-list'>
@@ -95,7 +81,6 @@ const FriendsListSection = ({
                       className='card-container'
                       key={`${currentCategory}${index}`}
                       category_id={currentCategory}
-                      //  handleCardDelete={handleCardDelete}
                     />
                   );
                 })}

@@ -36,7 +36,9 @@ const CreateFriendsList = ({
   };
 
   const handleOnClick = (name, friends) => {
-    createCategory(name, friends);
+    if (friends.length) {
+      createCategory(name, friends);
+    }
     window.location.reload();
     onClose();
   };
@@ -89,7 +91,11 @@ const CreateFriendsList = ({
             <div>No profiles found</div>
           )}
         </div>
-        <button onClick={() => handleOnClick(name, userList)}>Create</button>
+        <button
+          className='round-button create-button'
+          onClick={() => handleOnClick(name, userList)}>
+          Create
+        </button>
       </div>
     </>
   );
