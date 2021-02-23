@@ -9,14 +9,20 @@ import {
   CREATE_CATEGORY,
   DELETE_CATEGORY,
   REMOVE_FRIEND,
+  UPDATE_PROFILE,
 } from '../actions/types';
+
+import { getCurrentProfile } from './profile';
 
 //Create catagory for user profile
 
-export const createCategory = (categoryName, friends) => async (dispatch) => {
+export const createCategory = (categoryName, friends) => async (
+  dispatch,
+  getState
+) => {
   dispatch({ type: CLEAR_CATEGORY });
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
+  if (localStorage.getItem('token')) {
+    setAuthToken(localStorage.getItem('token'));
   }
   const body = {
     category_name: categoryName,
@@ -30,9 +36,17 @@ export const createCategory = (categoryName, friends) => async (dispatch) => {
 
   try {
     const res = await axios.post('/api/category', body, config);
+    const { profile } = getState().profile;
+
     dispatch({
       type: CREATE_CATEGORY,
       payload: res.data,
+    });
+    const categoryItems = [...profile.categories, res.data._id];
+    console.log(categoryItems);
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: { ...profile, categories: categoryItems },
     });
   } catch (err) {
     console.error(err);
@@ -61,9 +75,9 @@ export const getCategory = (categoryId) => async (dispatch) => {
 
 //Delete Category
 
-export const deleteCategory = (categoryId) => async (dispatch) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
+export const deleteCategory = (categoryId) => async (dispatch, getState) => {
+  if (localStorage.getItem('token')) {
+    setAuthToken(localStorage.getItem('token'));
   }
 
   const config = {
@@ -76,10 +90,19 @@ export const deleteCategory = (categoryId) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.delete('/api/category/delete-category', config);
-
+    const res = await axios.delete('/api/category', config);
+    const { profile } = getState().profile;
     dispatch({
       type: DELETE_CATEGORY,
+      payload: res.data,
+    });
+    const categoryItems = profile.categories.filter(
+      (category) => category !== res.data._id
+    );
+    console.log(categoryItems);
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: { ...profile, categories: categoryItems },
     });
   } catch (err) {
     console.error(err);
@@ -93,8 +116,8 @@ export const deleteCategory = (categoryId) => async (dispatch) => {
 //Add user to friends list
 
 export const addUserToCategory = (categoryId, userId) => async (dispatch) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
+  if (localStorage.getItem('token')) {
+    setAuthToken(localStorage.getItem('token'));
   }
   const body = {
     categoryId: categoryId,
@@ -126,8 +149,8 @@ export const addUserToCategory = (categoryId, userId) => async (dispatch) => {
 export const removeUserFromCategory = (categoryId, userId) => async (
   dispatch
 ) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
+  if (localStorage.getItem('token')) {
+    setAuthToken(localStorage.getItem('token'));
   }
   const body = {
     categoryId: categoryId,

@@ -33,8 +33,8 @@ const FriendsListSection = ({
   //Scrolling arrow functionality
 
   const sideScroll = (element, direction, speed, distance, step) => {
-    var scrollAmount = 0;
-    var slideTimer = setInterval(function () {
+    let scrollAmount = 0;
+    let slideTimer = setInterval(function () {
       if (direction === 'left') {
         element.scrollLeft -= step;
       } else {
@@ -48,15 +48,13 @@ const FriendsListSection = ({
   };
 
   const nextScroll = (e) => {
-    var container = document.querySelector('.card-list');
+    const container = document.querySelector('.card-list');
     sideScroll(container, 'right', 25, 100, 10);
-    console.log(container.offsetWidth);
   };
 
   const prevScroll = (e) => {
-    var container = document.querySelector('.card-list');
+    const container = document.querySelector('.card-list');
     sideScroll(container, 'left', 25, 100, 10);
-    console.log(container.offsetWidth);
   };
 
   return (
@@ -70,10 +68,10 @@ const FriendsListSection = ({
         </button>
       </div>
       <div className='card-section'>
-        {profile !== null ? (
-          categories.length >= 1 ? (
+        {!loading && profile !== null ? (
+          categories.length !== 0 ? (
             <>
-              <div class='arrow left' onClick={prevScroll}></div>
+              <div className='arrow left' onClick={prevScroll}></div>
               <div className='card-list'>
                 {profile.categories.map((currentCategory, index) => {
                   return (
@@ -85,7 +83,7 @@ const FriendsListSection = ({
                   );
                 })}
               </div>
-              <div class='arrow right' onClick={nextScroll}></div>
+              <div className='arrow right' onClick={nextScroll}></div>
             </>
           ) : (
             <div className='not-found'>No List found</div>

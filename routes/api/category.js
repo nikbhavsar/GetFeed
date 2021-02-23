@@ -47,7 +47,7 @@ router.post(
     if (friends) categoryFields.friends = friends;
 
     try {
-      let category = Category(categoryFields);
+      const category = Category(categoryFields);
       await category.save();
       await Profile.findOneAndUpdate(
         { user: req.user.id },
@@ -66,7 +66,7 @@ router.post(
 //@desc Delete category
 //@access Private
 
-router.delete('/delete-category', auth, async (req, res) => {
+router.delete('/', auth, async (req, res) => {
   try {
     const category = await Category.findOneAndDelete({
       _id: req.body.categoryId,

@@ -35,7 +35,6 @@ const FriendSection = ({
           (userProfile) =>
             userProfile.user !== null && (
               <div key={userProfile.user._id} className='profile-name'>
-                {' '}
                 {userProfile.user.name}
               </div>
             )

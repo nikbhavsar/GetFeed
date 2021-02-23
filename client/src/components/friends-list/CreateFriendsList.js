@@ -31,15 +31,14 @@ const CreateFriendsList = ({
     }
   }, [getProfiles]);
 
-  const addUser = (userid) => {
-    setUserList([...userList, userid]);
+  const addUser = (userId) => {
+    setUserList([...userList, userId]);
   };
 
   const handleOnClick = (name, friends) => {
     if (friends.length) {
       createCategory(name, friends);
     }
-    window.location.reload();
     onClose();
   };
 
@@ -67,7 +66,6 @@ const CreateFriendsList = ({
                 userProfile.user !== null && (
                   <div className='friends-list-item'>
                     <div className='avatar-name-section'>
-                      {' '}
                       {userProfile.user.name}
                     </div>
                     <div>

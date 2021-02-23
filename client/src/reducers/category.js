@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   category: null,
+  deletedCategory: null,
   loading: true,
   error: {},
 };
@@ -30,7 +31,7 @@ export default function (state = initialState, action) {
     case DELETE_CATEGORY:
       return {
         ...state,
-        category: null,
+        deletedCategory: payload,
         loading: false,
       };
     case CATEGORY_ERROR:

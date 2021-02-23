@@ -48,6 +48,44 @@ export const getProfiles = () => async (dispatch) => {
   }
 };
 
+//Get all Followers Profiles
+
+export const getFollowers = () => async (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
+  try {
+    const res = await axios.get('/api/profile');
+
+    dispatch({
+      type: GET_PROFILES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Get all following users Profiles
+
+export const getFollowing = () => async (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
+  try {
+    const res = await axios.get('/api/profile/following');
+
+    dispatch({
+      type: GET_PROFILES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
 //Get Profile by userid
 
 export const getProfileById = (userId) => async (dispatch) => {
@@ -69,8 +107,8 @@ export const getProfileById = (userId) => async (dispatch) => {
 //follow user
 
 export const followUser = (userId) => async (dispatch) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
+  if (localStorage.getItem('token')) {
+    setAuthToken(localStorage.getItem('token'));
   }
   const body = {
     personToFollowId: userId,
@@ -99,8 +137,8 @@ export const followUser = (userId) => async (dispatch) => {
 //UnFollow user
 
 export const unFollowUser = (userId) => async (dispatch) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
+  if (localStorage.getItem('token')) {
+    setAuthToken(localStorage.getItem('token'));
   }
   const body = {
     personToUnFollowId: userId,
