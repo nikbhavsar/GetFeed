@@ -26,7 +26,7 @@ router.get('/me', auth, async (req, res) => {
   }
 });
 
-//@route GET api/profiles
+//@route GET api/profile
 //@desc Get all profiles
 //@access Public
 
@@ -37,6 +37,56 @@ router.get('/', auth, async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
+  }
+});
+
+//@route GET api/profile/followers
+//@desc Get followers profiles
+//@access Private
+
+router.get('/followers', auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.user.id,
+    }).populate('user', ['name']);
+    if (!profile) {
+      res.status(400).json({ msg: 'There is no profile for this user.' });
+    }
+
+    const followersProfiles = await Profile.find({
+      user: { $in: profile.followers },
+    }).populate('user', ['name']);
+    if (!profile) {
+      res.status(400).json({ msg: 'There is no profile for this user.' });
+    }
+    res.json(followersProfiles);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+//@route GET api/profile/following
+//@desc Get following users profiles
+//@access Private
+
+router.get('/following', auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.user.id,
+    }).populate('user', ['name']);
+    if (!profile) {
+      res.status(400).json({ msg: 'There is no profile for this user.' });
+    }
+
+    const followingProfiles = await Profile.find({
+      user: { $in: profile.following },
+    }).populate('user', ['name']);
+    if (!profile) {
+      res.status(400).json({ msg: 'There is no profile for this user.' });
+    }
+    res.json(followingProfiles);
+  } catch (err) {
+    console.error(err.message);
   }
 });
 

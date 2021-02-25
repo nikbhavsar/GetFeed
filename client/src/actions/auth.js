@@ -16,8 +16,8 @@ import { createProfile } from './profile';
 //Load user
 
 export const loadUser = () => async (dispatch) => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token);
+  if (localStorage.getItem('token')) {
+    setAuthToken(localStorage.getItem('token'));
   }
 
   try {

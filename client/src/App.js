@@ -7,7 +7,7 @@ import AlertDiv from './components/AlertDiv';
 import './scss/styles.scss';
 import Navbar from './components/layout/Navbar';
 import setAuthToken from './utils/setAuthToken';
-import Dashboard from './components/layout/Dashboard';
+import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 //Redux imports
