@@ -4,9 +4,30 @@ const ProfileSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
   },
-  followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
-  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'user' }],
-  categories: [{ type: mongoose.Schema.Types.ObjectId, ref: 'category' }],
+  followers: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+    },
+  ],
+  following: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
+    },
+  ],
+  categories: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'category',
+    },
+  ],
+  polls: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'poll',
+    },
+  ],
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);

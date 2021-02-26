@@ -4,6 +4,7 @@ import {
   CLEAR_PROFILE,
   UPDATE_PROFILE,
   GET_PROFILES,
+  GET_FOLLOWING_FOLLOWERS,
   FOLLOW,
   UNFOLLOW,
 } from '../actions/types';
@@ -11,6 +12,7 @@ import {
 const initialState = {
   profile: null,
   profiles: [],
+  folowingFollowers: null,
   loading: true,
   error: {},
 };
@@ -30,6 +32,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         profiles: payload,
+        loading: false,
+      };
+    case GET_FOLLOWING_FOLLOWERS:
+      return {
+        ...state,
+        folowingFollowers: payload,
         loading: false,
       };
     case FOLLOW:

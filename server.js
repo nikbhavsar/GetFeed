@@ -37,6 +37,8 @@ app.use('/api/profile', require('./routes/api/profile'));
 
 app.use('/api/category', require('./routes/api/category'));
 
+app.use('/api/polls', require('./routes/api/poll'));
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

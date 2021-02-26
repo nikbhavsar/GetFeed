@@ -21,7 +21,7 @@ const FriendsListSection = ({
     if (profile !== null) {
       setCategories(profile.categories);
     }
-  }, []);
+  }, [profile]);
 
   const handleButtonClickOpen = () => {
     setModalOpen(true);
