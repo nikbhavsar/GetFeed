@@ -1,21 +1,17 @@
-.modal{
+.modal {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.paper{
+.paper {
   background-color: white;
-  -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-  -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-       box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
 }
 
-.tab-panel{
+.tab-panel {
   overflow-y: auto;
   max-height: 80vh;
   min-height: 50vh;
 }
-
-
-

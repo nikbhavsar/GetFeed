@@ -30,7 +30,7 @@ const PollSchema = new mongoose.Schema({
     },
   ],
 
-  fiendsList: {
+  friendsList: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'category',
   },

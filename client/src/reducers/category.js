@@ -1,5 +1,6 @@
 import {
   GET_CATEGORY,
+  GET_CATEGORIES,
   CATEGORY_ERROR,
   CLEAR_CATEGORY,
   UPDATE_CATEGORY,
@@ -10,6 +11,7 @@ import {
 
 const initialState = {
   category: null,
+  categories: null,
   deletedCategory: null,
   loading: true,
   error: {},
@@ -26,6 +28,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         category: payload,
+        loading: false,
+      };
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        categories: payload,
         loading: false,
       };
     case DELETE_CATEGORY:

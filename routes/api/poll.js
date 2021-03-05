@@ -1,11 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
+const { cloudinary } = require('../../config/cloudinary');
 const auth = require('../../middleware/auth');
+const config = require('../../config/keys');
 
 const User = require('../../modals/User');
 const Poll = require('../../modals/Poll');
 const Profile = require('../../modals/Profile');
+
+const uploadImage = async (imageFile) => {
+  try {
+    const uploadResponse = await cloudinary.uploader.upload(imageFile, {
+      upload_preset: 'get-feed',
+    });
+    return uploadResponse;
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ err: 'Something went wrong' });
+  }
+};
 
 //@route POST api/polls
 //@desc Create a poll
@@ -13,7 +27,13 @@ const Profile = require('../../modals/Profile');
 
 router.post(
   '/',
-  [auth, [check('question', 'Question is required').not().isEmpty()]],
+  [
+    auth,
+    [
+      check('question', 'Question is required').not().isEmpty(),
+      check('friendsList', 'Friends list is required').not().isEmpty(),
+    ],
+  ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -25,11 +45,16 @@ router.post(
     try {
       const user = await User.findById(req.user.id).select('-password');
 
+      const image1PublicId = (await uploadImage(req.body.opinionImage1))
+        .public_id;
+      const image2PublicId = (await uploadImage(req.body.opinionImage2))
+        .public_id;
+
       const newPoll = new Poll({
         question: req.body.question,
         name: user.name,
-        opinionImage1: req.body.opinionImage1,
-        opinionImage2: req.body.opinionImage2,
+        opinionImage1: image1PublicId,
+        opinionImage2: image2PublicId,
         friendsList: req.body.friendsList,
         user: req.user.id,
       });
@@ -57,7 +82,7 @@ router.post(
 
 router.get('/', auth, async (req, res) => {
   try {
-    const polls = await Poll.find().sort({
+    const polls = await Poll.find({ user: req.user.id }).sort({
       date: -1,
     });
     res.json(polls);

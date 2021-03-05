@@ -3,6 +3,7 @@ import setAuthToken from '../utils/setAuthToken';
 
 import {
   GET_CATEGORY,
+  GET_CATEGORIES,
   CATEGORY_ERROR,
   CLEAR_CATEGORY,
   UPDATE_CATEGORY,
@@ -11,8 +12,6 @@ import {
   REMOVE_FRIEND,
   UPDATE_PROFILE,
 } from '../actions/types';
-
-import { getCurrentProfile } from './profile';
 
 //Create catagory for user profile
 
@@ -50,6 +49,23 @@ export const createCategory = (categoryName, friends) => async (
     });
   } catch (err) {
     console.error(err);
+    dispatch({
+      type: CATEGORY_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//Get all Categories for current user
+// GET category by id
+export const getCategories = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/api/category');
+    dispatch({
+      type: GET_CATEGORIES,
+      payload: res.data,
+    });
+  } catch (err) {
     dispatch({
       type: CATEGORY_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },

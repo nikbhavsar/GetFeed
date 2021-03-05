@@ -5,6 +5,28 @@ const router = express.Router();
 const Category = require('../../modals/Category');
 const Profile = require('../../modals/Profile');
 
+//@route GET api/category
+//@desc get all categories for current user
+//@access Private
+
+router.get('/', auth, async (req, res) => {
+  try {
+    const category = await Category.find({
+      user: req.user.id,
+    });
+    if (!category) {
+      return res.status(400).json({ msg: 'Category not found.' });
+    }
+    res.json(category);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == 'ObjectId') {
+      return res.status(400).json({ msg: 'Categoryy not found.' });
+    }
+    res.status(500).send('Server Error');
+  }
+});
+
 //@route GET api/category/:Category_id
 //@desc get category by id
 //@access Private
@@ -45,6 +67,7 @@ router.post(
     const categoryFields = {};
     if (category_name) categoryFields.category_name = category_name;
     if (friends) categoryFields.friends = friends;
+    categoryFields.user = req.user.id;
 
     try {
       const category = Category(categoryFields);

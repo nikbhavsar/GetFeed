@@ -1,0 +1,61 @@
+//Create poll model styles
+.create-poll-model {
+  padding: $lg-font;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.create-poll-model__heading {
+  font-size: $md-font;
+  font-weight: bold;
+  padding: $md-font;
+}
+
+.dz-max-files-reached {
+  pointer-events: none;
+  cursor: default;
+}
+
+//PollItem styles
+.poll-item__question {
+  font-size: $md-font;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.poll-item__friends-list {
+  font-size: $sm-font;
+  color: gray;
+  font-weight: lighter;
+  margin-bottom: $md-font;
+}
+
+.poll-item {
+  padding: $md-font;
+  text-align: center;
+}
+
+.poll-item__images {
+  display: flex;
+  flex-direction: row;
+}
+.poll-item__images__image-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.poll-image {
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
+  margin: 10px;
+  border-radius: 2px;
+}
+
+.like-icon {
+  color: rgb(235, 72, 72);
+  font-size: 1rem !important;
+}
