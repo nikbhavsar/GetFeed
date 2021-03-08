@@ -116,6 +116,34 @@ router.get('/:id', auth, async (req, res) => {
   }
 });
 
+//@route GET api/polls/following
+//@desc Get polls of following user
+//@access Private
+
+router.get('/following/polls', auth, async (req, res) => {
+  try {
+    const followingUsers = await Profile.findOne({ user: req.user.id });
+    const followings = followingUsers.following;
+
+    const profilesArray = await Profile.find({
+      user: { $in: followings },
+    });
+
+    const pollsArray = profilesArray.map((profile) => {
+      return profile.polls;
+    });
+    var merged = [].concat.apply([], pollsArray);
+
+    const polls = await Poll.find({ _id: { $in: merged } }).sort({
+      date: -1,
+    });
+    res.json(polls);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 //@route PUT api/polls/like/1/:image_id
 //@desc Like image 1 of the poll
 //@access Private

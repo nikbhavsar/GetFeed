@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/auth';
 import Avatar from '@material-ui/core/Avatar';
@@ -10,7 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import FriendsModal from './FriendsModal';
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const [open, setOpen] = React.useState(false);
@@ -80,7 +81,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
                 <button onClick={handleButtonClickOpen}>Friends</button>
               </li>
               <li onClick={(e) => handleClick(e)}>
-                <a href='#'>Friends Polls</a>
+                <Link to='/friends-polls'>Friends Polls</Link>
               </li>
               <li onClick={(e) => handleClick(e)}>
                 <a href='#'>Opinions</a>
@@ -92,7 +93,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
               </li>
               <li onClick={(e) => handleClick(e)}>
                 <Avatar
-                  alt='Travis Howard'
+                  alt={user.name}
                   src='/static/images/avatar/2.jpg'
                   ref={anchorRef}
                   className='avtar'

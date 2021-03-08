@@ -77,7 +77,7 @@ const FriendsListSection = ({
                   return (
                     <FriendsListsSectionItem
                       className='card-container'
-                      key={`${currentCategory}${index}`}
+                      key={index}
                       category_id={currentCategory}
                     />
                   );

@@ -6,15 +6,80 @@
   justify-content: center;
   align-items: center;
 }
+.create-poll-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.poll-form-section {
+  display: flex;
+  justify-content: center;
+  // align-items: center;
+}
 .create-poll-model__heading {
   font-size: $md-font;
   font-weight: bold;
   padding: $md-font;
 }
+.poll-info-section {
+  display: flex;
+  flex-direction: column;
+  padding: $lg-font;
+}
+label span {
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.poll-info-section__question {
+}
+.poll-info-section__friends-list {
+  width: 100%;
+  padding: 15px 12px;
+  border: lightgray solid 1px;
+  border-radius: 5px;
+  outline: none;
+}
 
-.dz-max-files-reached {
-  pointer-events: none;
-  cursor: default;
+.image-sec {
+  flex-basis: 50%;
+}
+.image-input {
+  height: 100px;
+  width: 100px;
+}
+
+input[type='file'] {
+  display: none;
+}
+.custom-file-upload {
+  color: rgb(133, 131, 131);
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 88%;
+  width: 88%;
+  margin: $sm-font;
+  cursor: pointer;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.49);
+  -moz-box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.49);
+  box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.49);
+}
+
+.cloud-icon {
+  color: rgb(184, 183, 183);
+}
+
+.create-poll-button {
+  margin: $lg-font;
+  border: none;
+  outline: none;
+  color: white;
+  background-color: black;
 }
 
 //PollItem styles
@@ -25,7 +90,7 @@
 }
 
 .poll-item__friends-list {
-  font-size: $sm-font;
+  font-size: 0.9rem;
   color: gray;
   font-weight: lighter;
   margin-bottom: $md-font;
@@ -39,6 +104,7 @@
 .poll-item__images {
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 .poll-item__images__image-div {
   display: flex;
@@ -58,4 +124,53 @@
 .like-icon {
   color: rgb(235, 72, 72);
   font-size: 1rem !important;
+  padding-right: 5px;
+}
+
+.like-icon-section {
+  display: flex;
+  justify-content: center;
+}
+
+//Friends poll styles
+.poll-list-body {
+  background: rgb(255, 254, 254);
+}
+
+.poll-list-container {
+  width: 400px;
+  margin: auto;
+}
+
+.poll-card-container {
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
+  padding: $sm-font;
+  margin: $md-font;
+  border-radius: 10px;
+  background: rgb(241, 241, 241);
+}
+
+.poll-item__images__image-div-friends-poll {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.like-icon-friends {
+  color: rgb(245, 159, 159);
+  font-size: $lg-font !important;
+}
+
+.unlike-icon-friends {
+  color: rgb(201, 54, 54);
+  font-size: $lg-font !important;
+}
+.user-info {
+  font-weight: bold;
+}
+
+.poll-item-friends {
+  border-radius: 5px;
 }

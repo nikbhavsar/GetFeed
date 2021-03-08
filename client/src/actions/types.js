@@ -26,5 +26,7 @@ export const REMOVE_FRIEND = 'REMOVE_FRIEND';
 export const GET_FOLLOWING_FOLLOWERS = 'GET_FOLLOWING_FOLLOWERS';
 export const GET_POLLS = 'GET_POLLS';
 export const GET_POLL = 'GET_POLL';
+export const GET_FOLLOWING_POLL = 'GET_FOLLOWING_POLL';
 export const ADD_POLL = 'ADD_POLL';
 export const POLL_ERROR = 'POLL_ERROR';
+export const UPDATE_LIKES = 'UPDATE_LIKES';

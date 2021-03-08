@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { getPolls, createPoll } from '../../actions/poll';
 import { getCategories } from '../../actions/category';
 
 const CreatePollModel = ({
   getCategories,
   createPoll,
-  getPolls,
   category: { categories, loading },
+  profile: { profile },
   open,
   onClose,
   dispatch,
@@ -34,7 +35,7 @@ const CreatePollModel = ({
         }))
       );
     }
-  }, [getCategories, categories]);
+  }, [open, profile]);
 
   //Image input methods
 
@@ -51,7 +52,6 @@ const CreatePollModel = ({
   //Create the new poll
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    console.log(selected);
     createPoll(name, setImages.current[0], setImages.current[1], selected);
     setName('');
     setSelected('selected-list');
@@ -76,11 +76,11 @@ const CreatePollModel = ({
           <div className='paper create-poll-model'>
             <h1 className='create-poll-model__heading'>Create Poll</h1>
             <form onSubmit={handleSubmit} className='create-poll-section'>
-              <div>
+              <div className='poll-form-section'>
                 <div className='poll-info-section'>
                   <div className='poll-info-section__question'>
                     <label>
-                      Question:
+                      <span>Question:</span>
                       <input
                         type='text'
                         value={name}
@@ -88,36 +88,51 @@ const CreatePollModel = ({
                       />
                     </label>
                   </div>
-                  <div className='poll-info-section__friends-list'>
-                    <select
-                      disabled={loading}
-                      value={selected}
-                      onChange={(e) => setSelected(e.target.value)}>
-                      <option selected='selected' value='selected-list'>
-                        Select Your List
-                      </option>
-
-                      {items.map(({ label, value }) => (
-                        <option key={value} value={value}>
-                          {label}
+                  <div>
+                    <label>
+                      <span>Friend list:</span>
+                      <select
+                        className='poll-info-section__friends-list'
+                        disabled={loading}
+                        value={selected}
+                        onChange={(e) => setSelected(e.target.value)}>
+                        <option
+                          className='poll-info-section__friends-list'
+                          selected='selected'
+                          value='selected-list'>
+                          Select Your List
                         </option>
-                      ))}
-                    </select>
+
+                        {items.map(({ label, value }) => (
+                          <option key={value} value={value}>
+                            {label}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
                   </div>
                 </div>
                 <div className='image-sec'>
-                  {' '}
-                  <input
-                    type='file'
-                    name='image'
-                    onChange={handleFileInputChange}
-                    value={fileInputState}
-                    className='image-input'
-                  />
+                  <label class='custom-file-upload'>
+                    <input
+                      type='file'
+                      name='image'
+                      title='foo'
+                      onChange={handleFileInputChange}
+                      value={fileInputState}
+                      className='image-input'
+                    />
+                    <CloudUploadIcon className='cloud-icon' />
+                    Select two images
+                  </label>
                 </div>
               </div>
 
-              <input type='submit' value='Create' />
+              <input
+                type='submit'
+                value='Create'
+                className='round-button create-poll-button'
+              />
             </form>
           </div>
         </Fade>
@@ -127,6 +142,7 @@ const CreatePollModel = ({
 };
 
 const mapStateToProps = (state) => ({
+  profile: state.profile,
   category: state.category,
 });
 

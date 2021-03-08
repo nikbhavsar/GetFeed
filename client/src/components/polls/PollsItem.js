@@ -13,7 +13,6 @@ const PollsItem = ({
   category: { categories, loading },
 }) => {
   const [pollItem, setpollItem] = useState(null);
-  const [friendList, setfriendList] = useState([]);
 
   useEffect(() => {
     //Get the Poll by Id
@@ -24,7 +23,6 @@ const PollsItem = ({
         if (res.status === 200) {
           setpollItem(res.data);
         }
-        console.log(pollItem);
       } catch (err) {
         console.error(err);
       }
@@ -50,7 +48,10 @@ const PollsItem = ({
             crop='mfit'
             className='poll-image'
           />
-          <FavoriteIcon className='like-icon' />
+          <div className='like-icon-section'>
+            <FavoriteIcon className='like-icon' />{' '}
+            {pollItem.opinionImage1Likes.length}
+          </div>
         </div>
         <div className='poll-item__images__image-div'>
           <Image
@@ -61,7 +62,10 @@ const PollsItem = ({
             crop='mfit'
             className='poll-image'
           />
-          <FavoriteIcon className='like-icon' />
+          <div className='like-icon-section'>
+            <FavoriteIcon className='like-icon' />{' '}
+            {pollItem.opinionImage2Likes.length}
+          </div>
         </div>
       </div>
     </div>

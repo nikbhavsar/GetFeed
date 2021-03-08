@@ -3,7 +3,6 @@ import { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getPolls } from '../../actions/poll';
 import PollsItem from '../polls/PollsItem';
-import Spinner from '../layout/Spinner';
 import CreatePollModel from '../polls/CreatePollModel';
 
 const PollSection = ({ getPolls, profile: { loading, profile } }) => {
