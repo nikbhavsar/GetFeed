@@ -46,6 +46,7 @@ const CreatePollModel = ({
 
     reader.onloadend = () => {
       setImages.current = [...setImages.current, reader.result];
+      console.log(setImages.current);
     };
   };
 

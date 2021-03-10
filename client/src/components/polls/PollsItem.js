@@ -6,13 +6,8 @@ import { getCategories } from '../../actions/category';
 import Spinner from '../layout/Spinner';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-const PollsItem = ({
-  pollId,
-  getCategories,
-  auth,
-  category: { categories, loading },
-}) => {
-  const [pollItem, setpollItem] = useState(null);
+const PollsItem = ({ pollId, category: { loading } }) => {
+  const [pollItem, setPollItem] = useState(null);
 
   useEffect(() => {
     //Get the Poll by Id
@@ -21,7 +16,7 @@ const PollsItem = ({
         const res = await axios.get(`/api/polls/${pollId}`);
 
         if (res.status === 200) {
-          setpollItem(res.data);
+          setPollItem(res.data);
         }
       } catch (err) {
         console.error(err);
@@ -35,8 +30,12 @@ const PollsItem = ({
       <div className='poll-item__question'>{pollItem.question}</div>
       <div className='poll-item__friends-list'>
         {pollItem.opinionImage1Likes.length +
-          pollItem.opinionImage2Likes.length}{' '}
-        answers
+          pollItem.opinionImage2Likes.length}
+        {pollItem.opinionImage1Likes.length +
+          pollItem.opinionImage2Likes.length ===
+        1
+          ? ' answer'
+          : ' answers'}
       </div>
       <div className='poll-item__images'>
         <div className='poll-item__images__image-div'>
@@ -77,4 +76,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   category: state.category,
 });
-export default connect(mapStateToProps, { getCategories })(PollsItem);
+export default connect(mapStateToProps, {})(PollsItem);

@@ -15,8 +15,12 @@ const FriendsPollsItem = ({ pollData, onClick, auth, addLike, unLike }) => {
           <div className='poll-item__question'>{pollData.question}</div>
           <div className='poll-item__friends-list'>
             {pollData.opinionImage1Likes.length +
-              pollData.opinionImage2Likes.length}
-            answers
+              pollData.opinionImage2Likes.length}{' '}
+            {pollData.opinionImage1Likes.length +
+              pollData.opinionImage2Likes.length ===
+            1
+              ? ' answer'
+              : ' answers'}
           </div>
           <div className='poll-item__images'>
             <div className='poll-item__images__image-div'>
