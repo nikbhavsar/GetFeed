@@ -8,6 +8,7 @@ import './scss/styles.scss';
 import Navbar from './components/layout/Navbar';
 import setAuthToken from './utils/setAuthToken';
 import Dashboard from './components/dashboard/Dashboard';
+import FriendsPolls from './components/polls/FriendsPolls';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 //Redux imports
@@ -39,6 +40,11 @@ const App = () => {
               <Route exact path='/login' component={Login} />{' '}
               <PrivateRoute exact path='/friends' component={Profiles} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <PrivateRoute
+                exact
+                path='/friends-polls'
+                component={FriendsPolls}
+              />
             </Switch>
           </Fragment>
         </Router>

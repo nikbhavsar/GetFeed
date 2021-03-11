@@ -81,9 +81,7 @@ router.get('/following', auth, async (req, res) => {
     const followingProfiles = await Profile.find({
       user: { $in: profile.following },
     }).populate('user', ['name']);
-    if (!profile) {
-      res.status(400).json({ msg: 'There is no profile for this user.' });
-    }
+
     res.json(followingProfiles);
   } catch (err) {
     console.error(err.message);

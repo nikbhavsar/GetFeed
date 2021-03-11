@@ -9,6 +9,7 @@ import {
   CLEAR_PROFILE,
   FOLLOW,
   UNFOLLOW,
+  GET_FOLLOWING_FOLLOWERS,
 } from './types';
 
 // GET current users profile
@@ -51,12 +52,11 @@ export const getProfiles = () => async (dispatch) => {
 //Get all Followers Profiles
 
 export const getFollowers = () => async (dispatch) => {
-  dispatch({ type: CLEAR_PROFILE });
   try {
-    const res = await axios.get('/api/profile');
+    const res = await axios.get('/api/profile/followers');
 
     dispatch({
-      type: GET_PROFILES,
+      type: GET_FOLLOWING_FOLLOWERS,
       payload: res.data,
     });
   } catch (err) {
@@ -70,12 +70,11 @@ export const getFollowers = () => async (dispatch) => {
 //Get all following users Profiles
 
 export const getFollowing = () => async (dispatch) => {
-  dispatch({ type: CLEAR_PROFILE });
   try {
     const res = await axios.get('/api/profile/following');
 
     dispatch({
-      type: GET_PROFILES,
+      type: GET_FOLLOWING_FOLLOWERS,
       payload: res.data,
     });
   } catch (err) {

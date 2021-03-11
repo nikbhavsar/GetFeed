@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import ProfileItem from './ProfileItem';
 
-const Search = (props) => {
+const Search = ({ allProfile, profile }) => {
   const [data, setData] = useState([]);
   const [result, setResult] = useState('');
 
   useEffect(() => {
-    const results = props.allProfile.filter((userProfile) => {
+    const results = allProfile.filter((userProfile) => {
       return userProfile.user.name.toLowerCase().includes(result);
     });
 
@@ -28,14 +28,14 @@ const Search = (props) => {
         onChange={onChange}
       />
       <div className='profiles'>
-        {data.length > 0 && props.profile !== null ? (
+        {data.length > 0 && profile !== null ? (
           data.map(
             (userProfile) =>
               userProfile.user !== null && (
                 <ProfileItem
                   key={userProfile._id}
                   profile={userProfile}
-                  loginUser={props.profile}
+                  loginUser={profile}
                 />
               )
           )

@@ -15,13 +15,13 @@ const FriendsListSection = ({
   const [modalOpen, setModalOpen] = React.useState(false);
   const [categories, setCategories] = useState([]);
 
-  //Getting data fro FriendListSectionItem component
+  //Getting data from FriendListSectionItem component
 
   useEffect(() => {
     if (profile !== null) {
       setCategories(profile.categories);
     }
-  }, []);
+  }, [profile]);
 
   const handleButtonClickOpen = () => {
     setModalOpen(true);
@@ -77,7 +77,7 @@ const FriendsListSection = ({
                   return (
                     <FriendsListsSectionItem
                       className='card-container'
-                      key={`${currentCategory}${index}`}
+                      key={index}
                       category_id={currentCategory}
                     />
                   );

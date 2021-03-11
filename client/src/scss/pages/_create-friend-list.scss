@@ -46,7 +46,8 @@
   align-items: center;
 }
 
-.card-list {
+.card-list,
+.poll-list {
   display: flex;
   max-width: 58vw;
   overflow-x: auto;
@@ -58,7 +59,8 @@
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-.card-list::-webkit-scrollbar {
+.card-list::-webkit-scrollbar,
+.poll-list::-webkit-scrollbar {
   display: none;
 }
 
@@ -87,13 +89,11 @@
   flex-shrink: 0;
   background-color: #fdfdfd;
   border: rgb(223, 220, 220) solid 1px;
-  border-radius: 5px;
+  border-radius: 2px;
   margin: 0.6rem 5px;
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3),
-    0 0 5px rgba(80, 80, 80, 0.1) inset;
-  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3),
-    0 0 5px rgba(85, 85, 85, 0.1) inset;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 5px rgba(80, 79, 79, 0.1) inset;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
 }
 
 .category-info {

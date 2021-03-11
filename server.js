@@ -1,16 +1,20 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+var cors = require('cors');
 
 const app = express();
+app.use(cors());
 
 // Bodyparser middleware
+app.use(bodyParser.json({ limit: '50mb' }));
 app.use(
   bodyParser.urlencoded({
-    extended: false,
+    limit: '50mb',
+    extended: true,
+    parameterLimit: 50000,
   })
 );
-app.use(bodyParser.json());
 
 // DB Config
 const db = require('./config/keys').mongoURI;
@@ -36,6 +40,8 @@ app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/profile', require('./routes/api/profile'));
 
 app.use('/api/category', require('./routes/api/category'));
+
+app.use('/api/polls', require('./routes/api/poll'));
 
 const PORT = process.env.PORT || 5000;
 

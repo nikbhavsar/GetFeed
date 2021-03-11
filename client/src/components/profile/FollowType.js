@@ -1,32 +1,30 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  getCurrentProfile,
-  getFollowing,
-  getFollowers,
-} from '../../actions/profile';
+import { getProfiles, getCurrentProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
 import Search from './Search';
 
 const FollowType = ({
+  getProfiles,
   getCurrentProfile,
-  getFollowers,
-  getFollowing,
   profile: { profiles, loading, profile },
   followType,
 }) => {
   const [allProfile, setAllProfile] = useState([]);
 
   useEffect(() => {
+    getProfiles();
     getCurrentProfile();
     if (profiles !== [] && profile !== null) {
-      if (followType === 'following') {
-        setAllProfile(getFollowing());
-      } else {
-        setAllProfile(getFollowers());
-      }
+      setAllProfile(
+        profiles.filter(
+          (userProfile) =>
+            profile[followType].includes(userProfile.user._id) &&
+            userProfile.user._id !== profile.user._id
+        )
+      );
     }
-  }, [followType]);
+  }, [getProfiles]);
 
   return loading || profiles === [] || profile === null ? (
     <Spinner />
@@ -40,8 +38,6 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, {
-  getCurrentProfile,
-  getFollowers,
-  getFollowing,
-})(FollowType);
+export default connect(mapStateToProps, { getProfiles, getCurrentProfile })(
+  FollowType
+);

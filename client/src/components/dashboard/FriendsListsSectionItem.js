@@ -24,7 +24,6 @@ const FriendsListsSectionItem = ({
     //Get the category by Id
     try {
       const res = await axios.get(`/api/category/${category_id}`);
-      console.log(res.data);
 
       if (res.status === 200) {
         setCategoryItem(res.data);
