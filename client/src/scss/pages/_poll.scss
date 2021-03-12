@@ -83,6 +83,16 @@ input[type='file'] {
 }
 
 //PollItem styles
+.edit-remove-section {
+  text-align: right;
+
+  .setting-icon {
+    font-size: $md-font !important;
+  }
+}
+.delete-icon {
+  color: rgb(222, 216, 216);
+}
 .poll-item__question {
   font-size: $md-font;
   font-weight: bold;

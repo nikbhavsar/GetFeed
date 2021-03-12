@@ -57,7 +57,6 @@ export const createCategory = (categoryName, friends) => async (
 };
 
 //Get all Categories for current user
-// GET category by id
 export const getCategories = () => async (dispatch) => {
   try {
     const res = await axios.get('/api/category');

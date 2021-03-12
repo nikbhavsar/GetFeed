@@ -2,11 +2,15 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Image } from 'cloudinary-react';
-import { getCategories } from '../../actions/category';
+import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
+import SettingsIcon from '@material-ui/icons/Settings';
+import { deletePoll } from '../../actions/poll';
 import Spinner from '../layout/Spinner';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import EditPollModel from './EditPollModel';
 
-const PollsItem = ({ pollId, category: { loading } }) => {
+const PollsItem = ({ deletePoll, pollId, category: { loading } }) => {
+  const [modalOpen, setModalOpen] = useState(false);
   const [pollItem, setPollItem] = useState(null);
 
   useEffect(() => {
@@ -23,10 +27,31 @@ const PollsItem = ({ pollId, category: { loading } }) => {
       }
     };
     getPollItem();
-  }, [pollId]);
+  }, [pollId, modalOpen]);
+
+  //Open and close model
+  const handleButtonClickOpen = () => {
+    setModalOpen(true);
+  };
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
 
   return !loading && pollItem !== null ? (
     <div className='category-container poll-item'>
+      <div className='edit-remove-section'>
+        <SettingsIcon
+          className='setting-icon edit-icon'
+          onClick={handleButtonClickOpen}
+        />
+
+        <DeleteRoundedIcon
+          onClick={(e) => {
+            deletePoll(pollId);
+          }}
+          className='setting-icon delete-icon'
+        />
+      </div>
       <div className='poll-item__question'>{pollItem.question}</div>
       <div className='poll-item__friends-list'>
         {pollItem.opinionImage1Likes.length +
@@ -67,6 +92,13 @@ const PollsItem = ({ pollId, category: { loading } }) => {
           </div>
         </div>
       </div>
+      <EditPollModel
+        open={modalOpen}
+        onClose={handleModalClose}
+        pollId={pollItem._id}
+        question={pollItem.question}
+        list={pollItem.friendsList}
+      />
     </div>
   ) : (
     <Spinner />
@@ -76,4 +108,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   category: state.category,
 });
-export default connect(mapStateToProps, {})(PollsItem);
+export default connect(mapStateToProps, { deletePoll })(PollsItem);

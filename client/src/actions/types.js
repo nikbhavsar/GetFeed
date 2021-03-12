@@ -30,3 +30,5 @@ export const GET_FOLLOWING_POLL = 'GET_FOLLOWING_POLL';
 export const ADD_POLL = 'ADD_POLL';
 export const POLL_ERROR = 'POLL_ERROR';
 export const UPDATE_LIKES = 'UPDATE_LIKES';
+export const DELETE_POLL = 'DELETE_POLL';
+export const UPDATE_POLL = 'UPDATE_POLL';
