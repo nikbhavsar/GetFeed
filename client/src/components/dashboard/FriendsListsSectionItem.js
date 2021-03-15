@@ -75,9 +75,9 @@ const FriendsListsSectionItem = ({
         </div>
       </div>
       <div className='friends-list'>
-        {friends.map((friend) => {
+        {friends.map((friend, index) => {
           return (
-            <div className='friends-list_list-item'>
+            <div key={index} className='friends-list_list-item'>
               <ClearIcon
                 onClick={() => handleDelete(friend)}
                 className='clear-icon'

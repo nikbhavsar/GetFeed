@@ -19,6 +19,10 @@ const PollSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users',
       },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
     },
   ],
   opinionImage2Likes: [
@@ -26,6 +30,10 @@ const PollSchema = new mongoose.Schema({
       user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users',
+      },
+      date: {
+        type: Date,
+        default: Date.now,
       },
     },
   ],

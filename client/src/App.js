@@ -18,6 +18,7 @@ import { store, persistor } from './store';
 import { loadUser } from './actions/auth';
 import Profiles from './components/profile/Profiles';
 import { PersistGate } from 'redux-persist/integration/react';
+import PollDetails from './components/polls/PollDetails';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -40,6 +41,11 @@ const App = () => {
               <Route exact path='/login' component={Login} />{' '}
               <PrivateRoute exact path='/friends' component={Profiles} />
               <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <PrivateRoute
+                path='/poll-details'
+                exact
+                component={PollDetails}
+              />
               <PrivateRoute
                 exact
                 path='/friends-polls'

@@ -4,6 +4,7 @@ import { getFollowingPoll } from '../../actions/poll';
 import FriendsPollsItem from './FriendsPollsItem';
 import Spinner from '../layout/Spinner';
 import { v4 as uuid } from 'uuid';
+import FriendsSection from '../dashboard/FriendsSection';
 
 const FriendsPolls = ({
   getFollowingPoll,
@@ -24,11 +25,22 @@ const FriendsPolls = ({
     setCount((prevCount) => !prevCount);
   };
   return !loading && friendsPolls.length ? (
-    <div className='poll-list-body'>
-      <div className='poll-list-container'>
-        {friendsPolls.map((poll) => (
-          <FriendsPollsItem key={uuid()} pollData={poll} onClick={increment} />
-        ))}
+    <div className='dashboard'>
+      <div className='friends-section'>
+        <FriendsSection />
+      </div>
+      <div className='friends-list-poll-section'>
+        <div className='poll-list-body'>
+          <div className='poll-list-container'>
+            {friendsPolls.map((poll) => (
+              <FriendsPollsItem
+                key={uuid()}
+                pollData={poll}
+                onClick={increment}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   ) : (

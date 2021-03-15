@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { Redirect, useHistory } from 'react-router-dom';
 import { Image } from 'cloudinary-react';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -12,6 +13,7 @@ import EditPollModel from './EditPollModel';
 const PollsItem = ({ deletePoll, pollId, category: { loading } }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [pollItem, setPollItem] = useState(null);
+  const history = useHistory();
 
   useEffect(() => {
     //Get the Poll by Id
@@ -29,16 +31,28 @@ const PollsItem = ({ deletePoll, pollId, category: { loading } }) => {
     getPollItem();
   }, [pollId, modalOpen]);
 
+  //Redirect to Poll Details component
+  const handleOpenPollDetails = () => {
+    history.push({
+      pathname: '/poll-details',
+      state: { data: pollItem },
+    });
+  };
+
   //Open and close model
-  const handleButtonClickOpen = () => {
+  const handleButtonClickOpen = (e) => {
+    e.stopPropagation();
     setModalOpen(true);
   };
-  const handleModalClose = () => {
+  const handleModalClose = (e) => {
+    e.stopPropagation();
     setModalOpen(false);
   };
 
   return !loading && pollItem !== null ? (
-    <div className='category-container poll-item'>
+    <div
+      className='category-container poll-item'
+      onClick={handleOpenPollDetails}>
       <div className='edit-remove-section'>
         <SettingsIcon
           className='setting-icon edit-icon'
@@ -47,6 +61,7 @@ const PollsItem = ({ deletePoll, pollId, category: { loading } }) => {
 
         <DeleteRoundedIcon
           onClick={(e) => {
+            e.stopPropagation();
             deletePoll(pollId);
           }}
           className='setting-icon delete-icon'

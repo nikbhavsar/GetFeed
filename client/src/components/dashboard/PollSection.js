@@ -65,7 +65,7 @@ const PollSection = ({ getPolls, profile: { loading, profile } }) => {
             <div className='arrow left' onClick={prevScroll}></div>
             <div className='poll-list'>
               {polls.map((poll) => (
-                <PollsItem key={poll._id} pollId={poll} />
+                <PollsItem key={poll} pollId={poll} />
               ))}
             </div>
             <div className='arrow right' onClick={nextScroll}></div>

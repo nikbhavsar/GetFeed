@@ -66,7 +66,9 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
     return (
       <div className='nav-container'>
         <nav className='navbar'>
-          <div className='brandTitle'>GetFeed</div>
+          <div className='brandTitle'>
+            <Link to='/dashboard'>GetFeed</Link>
+          </div>
           <a
             href='#'
             className={'navbarToggler ' + (isClicked ? 'active' : null)}

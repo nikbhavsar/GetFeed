@@ -8,7 +8,6 @@ import Spinner from '../layout/Spinner';
 const FriendsPollsItem = ({ pollData, onClick, auth, addLike, unLike }) => {
   return pollData ? (
     <>
-      {' '}
       <div className='poll-card-container'>
         <div className='user-info'>{pollData.name}</div>
         <div className='category-container poll-item poll-item-friends'>
