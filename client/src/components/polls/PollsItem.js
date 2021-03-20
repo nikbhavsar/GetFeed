@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Image } from 'cloudinary-react';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -10,7 +10,7 @@ import Spinner from '../layout/Spinner';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import EditPollModel from './EditPollModel';
 
-const PollsItem = ({ deletePoll, pollId, category: { loading } }) => {
+const PollsItem = ({ deletePoll, pollId, category: { loading }, auth }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [pollItem, setPollItem] = useState(null);
   const history = useHistory();
@@ -41,69 +41,68 @@ const PollsItem = ({ deletePoll, pollId, category: { loading } }) => {
 
   //Open and close model
   const handleButtonClickOpen = (e) => {
-    e.stopPropagation();
     setModalOpen(true);
   };
   const handleModalClose = (e) => {
-    e.stopPropagation();
     setModalOpen(false);
   };
 
   return !loading && pollItem !== null ? (
-    <div
-      className='category-container poll-item'
-      onClick={handleOpenPollDetails}>
-      <div className='edit-remove-section'>
-        <SettingsIcon
-          className='setting-icon edit-icon'
-          onClick={handleButtonClickOpen}
-        />
+    <div className='category-container poll-item'>
+      {pollItem.user === auth.user._id && (
+        <div className='edit-remove-section'>
+          <SettingsIcon
+            className='setting-icon edit-icon'
+            onClick={handleButtonClickOpen}
+          />
 
-        <DeleteRoundedIcon
-          onClick={(e) => {
-            e.stopPropagation();
-            deletePoll(pollId);
-          }}
-          className='setting-icon delete-icon'
-        />
-      </div>
-      <div className='poll-item__question'>{pollItem.question}</div>
-      <div className='poll-item__friends-list'>
-        {pollItem.opinionImage1Likes.length +
-          pollItem.opinionImage2Likes.length}
-        {pollItem.opinionImage1Likes.length +
-          pollItem.opinionImage2Likes.length ===
-        1
-          ? ' answer'
-          : ' answers'}
-      </div>
-      <div className='poll-item__images'>
-        <div className='poll-item__images__image-div'>
-          <Image
-            cloudName='daqdhcvyv'
-            publicId={pollItem.opinionImage1}
-            width='75'
-            height='75'
-            crop='mfit'
-            className='poll-image'
+          <DeleteRoundedIcon
+            onClick={(e) => {
+              deletePoll(pollId);
+            }}
+            className='setting-icon delete-icon'
           />
-          <div className='like-icon-section'>
-            <FavoriteIcon className='like-icon' />{' '}
-            {pollItem.opinionImage1Likes.length}
-          </div>
         </div>
-        <div className='poll-item__images__image-div'>
-          <Image
-            cloudName='daqdhcvyv'
-            publicId={pollItem.opinionImage2}
-            width='75'
-            height='75'
-            crop='mfit'
-            className='poll-image'
-          />
-          <div className='like-icon-section'>
-            <FavoriteIcon className='like-icon' />{' '}
-            {pollItem.opinionImage2Likes.length}
+      )}
+      <div onClick={handleOpenPollDetails}>
+        <div className='poll-item__question'>{pollItem.question}</div>
+        <div className='poll-item__friends-list'>
+          {pollItem.opinionImage1Likes.length +
+            pollItem.opinionImage2Likes.length}
+          {pollItem.opinionImage1Likes.length +
+            pollItem.opinionImage2Likes.length ===
+          1
+            ? ' answer'
+            : ' answers'}
+        </div>
+        <div className='poll-item__images'>
+          <div className='poll-item__images__image-div'>
+            <Image
+              cloudName='daqdhcvyv'
+              publicId={pollItem.opinionImage1}
+              width='75'
+              height='75'
+              crop='mfit'
+              className='poll-image'
+            />
+            <div className='like-icon-section'>
+              <FavoriteIcon className='like-icon' />{' '}
+              {pollItem.opinionImage1Likes.length}
+            </div>
+          </div>
+          <div className='poll-item__images__image-div'>
+            <Image
+              cloudName='daqdhcvyv'
+              publicId={pollItem.opinionImage2}
+              width='75'
+              height='75'
+              crop='mfit'
+              className='poll-image'
+            />
+            <div className='like-icon-section'>
+              <FavoriteIcon className='like-icon' />{' '}
+              {pollItem.opinionImage2Likes.length}
+            </div>
           </div>
         </div>
       </div>

@@ -59,7 +59,10 @@
 //Friends Section styles
 
 .profile-name {
+  display: flex;
+  align-items: center;
   margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .profiles__heading {

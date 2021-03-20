@@ -19,6 +19,7 @@ import { loadUser } from './actions/auth';
 import Profiles from './components/profile/Profiles';
 import { PersistGate } from 'redux-persist/integration/react';
 import PollDetails from './components/polls/PollDetails';
+import PublicProfile from './components/profile/PublicProfile';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -51,6 +52,7 @@ const App = () => {
                 path='/friends-polls'
                 component={FriendsPolls}
               />
+              <PrivateRoute path='/profile' exact component={PublicProfile} />
             </Switch>
           </Fragment>
         </Router>

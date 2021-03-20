@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { Redirect, useHistory } from 'react-router-dom';
 import { getProfiles, getCurrentProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
+import Avatar from '@material-ui/core/Avatar';
 
 const FriendSection = ({
   getProfiles,
@@ -9,6 +11,7 @@ const FriendSection = ({
   profile: { profiles, loading, profile },
 }) => {
   const [allProfile, setAllProfile] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     getProfiles();
@@ -23,7 +26,7 @@ const FriendSection = ({
         )
       );
     }
-  }, []);
+  }, [getProfiles, getCurrentProfile]);
 
   return loading && profiles === [] && profile === null ? (
     <Spinner />
@@ -34,8 +37,21 @@ const FriendSection = ({
         allProfile.map(
           (userProfile) =>
             userProfile.user !== null && (
-              <div key={userProfile.user._id} className='profile-name'>
-                {userProfile.user.name}
+              <div
+                key={userProfile.user._id}
+                className='profile-name'
+                onClick={() => {
+                  history.push({
+                    pathname: '/profile',
+                    state: { data: userProfile },
+                  });
+                }}>
+                <Avatar
+                  alt={userProfile.user.name}
+                  src={`https://res.cloudinary.com/daqdhcvyv/image/upload/v1615793443/${userProfile.avatar}`}
+                  className='user-avtar'
+                />
+                <> {userProfile.user.name} </>
               </div>
             )
         )

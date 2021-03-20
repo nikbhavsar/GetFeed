@@ -4,14 +4,17 @@ import { getUserById } from '../../actions/auth';
 import axios from 'axios';
 import { Image } from 'cloudinary-react';
 import moment from 'moment';
+import Avatar from '@material-ui/core/Avatar';
 
 const UserVoteItem = ({ likes, auth: { otherUser }, getUserById }) => {
   const [userName, setUserName] = useState('');
+  const [avatar, setavatar] = useState('');
   useEffect(() => {
     const getUser = async (userId) => {
-      const res = await axios.get(`/api/auth/${userId}`);
+      const res = await axios.get(`/api/profile/user/${userId}`);
       if (res.status === 200) {
-        setUserName(res.data.name);
+        setUserName(res.data.user.name);
+        setavatar(res.data.avatar);
       }
     };
     getUser(likes.user);
@@ -22,7 +25,12 @@ const UserVoteItem = ({ likes, auth: { otherUser }, getUserById }) => {
     <>
       <div className='user-vote-item-section'>
         <div className='user-info'>
-          <div className='avatar'></div>
+          <div className='avatar'>
+            <Avatar
+              alt={userName}
+              src={`https://res.cloudinary.com/daqdhcvyv/image/upload/v1615793443/${avatar}`}
+            />
+          </div>
           <div className='user-name'>
             <div>{userName} voted</div>
             <div className='time-info'>{moment(likes.date).fromNow()}</div>
