@@ -17,7 +17,7 @@ const PublicProfile = (props) => {
           {' '}
           <Avatar
             alt={user.name}
-            src={`https://res.cloudinary.com/daqdhcvyv/image/upload/v1615793443/${avatar}`}
+            src={avatar}
             className='user-avtar public-profile-avatar'
           />
         </div>

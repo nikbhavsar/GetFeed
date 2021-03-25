@@ -48,7 +48,7 @@ const FriendSection = ({
                 }}>
                 <Avatar
                   alt={userProfile.user.name}
-                  src={`https://res.cloudinary.com/daqdhcvyv/image/upload/v1615793443/${userProfile.avatar}`}
+                  src={userProfile.avatar}
                   className='user-avtar'
                 />
                 <> {userProfile.user.name} </>

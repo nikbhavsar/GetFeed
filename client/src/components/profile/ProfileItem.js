@@ -16,11 +16,7 @@ const ProfileItem = ({
     <div className='profile bg-light'>
       <div className='profile-item'>
         <div className='avatar-name-section'>
-          <Avatar
-            alt={name}
-            src={`https://res.cloudinary.com/daqdhcvyv/image/upload/v1615793443/${avatar}`}
-            className='user-avtar'
-          />
+          <Avatar alt={name} src={avatar} className='user-avtar' />
           {name}
         </div>
 

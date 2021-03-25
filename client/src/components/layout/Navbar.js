@@ -114,7 +114,7 @@ const Navbar = ({
               <li onClick={(e) => handleClick(e)}>
                 <Avatar
                   alt={user.name}
-                  src={`https://res.cloudinary.com/daqdhcvyv/image/upload/v1615793443/${image}`}
+                  src={image}
                   ref={anchorRef}
                   className='avtar'
                   aria-controls={open ? 'menu-list-grow' : undefined}

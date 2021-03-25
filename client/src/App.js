@@ -20,6 +20,7 @@ import Profiles from './components/profile/Profiles';
 import { PersistGate } from 'redux-persist/integration/react';
 import PollDetails from './components/polls/PollDetails';
 import PublicProfile from './components/profile/PublicProfile';
+import io from 'socket.io-client';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);

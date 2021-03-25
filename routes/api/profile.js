@@ -202,7 +202,9 @@ router.put('/update-avatar', auth, async (req, res) => {
 
     const profile = await Profile.findOneAndUpdate(
       { user: req.user.id },
-      { avatar: image.public_id },
+      {
+        avatar: `https://res.cloudinary.com/daqdhcvyv/image/upload/v1615793443/${image.public_id}`,
+      },
       { new: true }
     );
     res.json(profile);
