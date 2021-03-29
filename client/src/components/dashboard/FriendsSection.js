@@ -1,17 +1,60 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useReducer } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import { getProfiles, getCurrentProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
 import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
+import Badge from '@material-ui/core/Badge';
+import { withStyles } from '@material-ui/core/styles';
+
+const StyledBadge2 = withStyles((theme) => ({
+  badge: {
+    backgroundColor: '#44b700',
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    '&::after': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      borderRadius: '50%',
+      animation: '$ripple 1.2s infinite ease-in-out',
+      border: '1px solid #44b700',
+      content: '""',
+    },
+  },
+  '@keyframes ripple': {
+    '0%': {
+      transform: 'scale(.8)',
+      opacity: 1,
+    },
+    '100%': {
+      transform: 'scale(2.4)',
+      opacity: 0,
+    },
+  },
+}))(Badge);
 
 const FriendSection = ({
+  socket,
   getProfiles,
   getCurrentProfile,
   profile: { profiles, loading, profile },
 }) => {
   const [allProfile, setAllProfile] = useState([]);
   const history = useHistory();
+  const [userList, setUserList] = useState([]);
+  const [, forceUpdate] = useState();
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('userStatus', (message) => {
+        setUserList(message.users);
+      });
+    }
+    setTimeout(forceUpdate, 2000);
+  }, [socket, setUserList]);
 
   useEffect(() => {
     getProfiles();
@@ -46,12 +89,31 @@ const FriendSection = ({
                     state: { data: userProfile },
                   });
                 }}>
-                <Avatar
-                  alt={userProfile.user.name}
-                  src={userProfile.avatar}
-                  className='user-avtar'
-                />
-                <> {userProfile.user.name} </>
+                <Box display='flex'>
+                  <Box m={1}>
+                    {userList.includes(userProfile.user._id) ? (
+                      <StyledBadge2
+                        overlap='circle'
+                        anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'right',
+                        }}
+                        variant='dot'>
+                        <Avatar
+                          alt={userProfile.user.name}
+                          src={userProfile.avatar}
+                        />
+                      </StyledBadge2>
+                    ) : (
+                      <Avatar
+                        alt={userProfile.user.name}
+                        src={userProfile.avatar}
+                      />
+                    )}
+                  </Box>
+                </Box>
+
+                <>{userProfile.user.name}</>
               </div>
             )
         )

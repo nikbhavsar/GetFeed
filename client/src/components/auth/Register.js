@@ -39,7 +39,7 @@ const Register = ({ setAlert, register, isAuthenticated, createProfile }) => {
           {' '}
           <form className='signup-login-form' onSubmit={(e) => onSubmit(e)}>
             <h1 className='tagline'>Create an account</h1>
-            <label className='txt-field-label' for='name'>
+            <label className='txt-field-label' htmlFor='name'>
               <b>Your Name</b>
             </label>
             <input
@@ -51,7 +51,7 @@ const Register = ({ setAlert, register, isAuthenticated, createProfile }) => {
               onChange={(e) => onChange(e)}
             />
 
-            <label className='txt-field-label' for='email'>
+            <label className='txt-field-label' htmlFor='email'>
               <b>Your Email</b>
             </label>
             <input
@@ -64,7 +64,7 @@ const Register = ({ setAlert, register, isAuthenticated, createProfile }) => {
               required
             />
 
-            <label className='txt-field-label' for='password'>
+            <label className='txt-field-label' htmlFor='password'>
               <b>Password</b>
             </label>
             <input
@@ -83,8 +83,7 @@ const Register = ({ setAlert, register, isAuthenticated, createProfile }) => {
                 name='agree-checkbox'
                 required
               />
-              <label for='agree-checkbox' className='checkbox-label'>
-                {' '}
+              <label htmlFor='agree-checkbox' className='checkbox-label'>
                 By signing up I agree with <span>terms and conditions</span>
               </label>
             </div>

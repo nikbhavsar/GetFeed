@@ -14,6 +14,7 @@ import { getCurrentProfile } from '../../actions/profile';
 import UpdateProfileModal from '../profile/UpdatePeofileModal';
 
 const Navbar = ({
+  socket,
   auth: { isAuthenticated, loading, user },
   getCurrentProfile,
   profile: { profile },
@@ -103,13 +104,9 @@ const Navbar = ({
               <li onClick={(e) => handleClick(e)}>
                 <Link to='/friends-polls'>Friends Polls</Link>
               </li>
+
               <li onClick={(e) => handleClick(e)}>
-                <a href='#'>Opinions</a>
-              </li>
-              <li onClick={(e) => handleClick(e)}>
-                <a href='#' className='round-button create-poll'>
-                  Create Poll
-                </a>
+                <a className='round-button create-poll'>Create Poll</a>
               </li>
               <li onClick={(e) => handleClick(e)}>
                 <Avatar
@@ -148,6 +145,13 @@ const Navbar = ({
                             <MenuItem
                               onClick={() => {
                                 handleClick();
+
+                                if (socket) {
+                                  socket.emit('logout');
+                                } else {
+                                  setTimeout(socket.emit('logout'), 2000);
+                                }
+
                                 logout();
                               }}>
                               Logout

@@ -32,6 +32,9 @@ const ProfileSchema = new mongoose.Schema({
       ref: 'poll',
     },
   ],
+  isActive: {
+    type: Boolean,
+  },
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);

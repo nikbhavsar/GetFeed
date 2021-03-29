@@ -136,6 +136,8 @@ router.post('/', auth, async (req, res) => {
 
   profileFields.following = [];
 
+  profileFields.isActive = true;
+
   try {
     profile = new Profile(profileFields);
     await profile.save();

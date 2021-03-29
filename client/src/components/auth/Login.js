@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../../actions/auth';
 
-const Login = ({ login, isAuthenticated }) => {
+const Login = ({ login, isAuthenticated, setupSocket }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,6 +22,7 @@ const Login = ({ login, isAuthenticated }) => {
 
   //Redirect if logged in
   if (isAuthenticated) {
+    setupSocket();
     return <Redirect to='/dashboard' />;
   }
   return (
@@ -36,7 +37,7 @@ const Login = ({ login, isAuthenticated }) => {
             <form className='signup-login-form' onSubmit={(e) => onSubmit(e)}>
               <h1 className='tagline'>Log In</h1>
               <div>
-                <label className='txt-field-label' for='email'>
+                <label className='txt-field-label' htmlFor='email'>
                   <b>Email Address</b>
                 </label>
                 <input
@@ -51,7 +52,7 @@ const Login = ({ login, isAuthenticated }) => {
               </div>
 
               <div>
-                <label className='txt-field-label' for='password'>
+                <label className='txt-field-label' htmlFor='password'>
                   <b>Password</b>
                 </label>
                 <input

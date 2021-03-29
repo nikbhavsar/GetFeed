@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Register from './components/auth/Register';
@@ -21,28 +21,69 @@ import { PersistGate } from 'redux-persist/integration/react';
 import PollDetails from './components/polls/PollDetails';
 import PublicProfile from './components/profile/PublicProfile';
 import io from 'socket.io-client';
+import Spinner from './components/layout/Spinner';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
 const App = () => {
+  const [socket, setSocket] = React.useState(null);
+
+  const setupSocket = () => {
+    const token = localStorage.getItem('token');
+    if (token && !socket) {
+      const newSocket = io('http://localhost:5000', {
+        query: {
+          token: localStorage.getItem('token'),
+        },
+      });
+      newSocket.emit('connection');
+
+      newSocket.on('disconnect', () => {
+        setSocket(null);
+        setTimeout(setupSocket, 1000);
+      });
+
+      newSocket.on('connect', () => {
+        console.log('connected');
+      });
+
+      setSocket(newSocket);
+    }
+  };
+
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
+
+  useEffect(() => {
+    setupSocket();
+    console.log(socket);
+    //eslint-disable-next-line
+  }, []);
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        {' '}
         <Router>
           <Fragment>
-            <Navbar></Navbar>
+            <Navbar socket={socket}></Navbar>
             <AlertDiv />
             <Route exact path='/' component={Register} />
             <Switch>
-              <Route exact path='/login' component={Login} />{' '}
+              <Route
+                path='/login'
+                render={() => <Login setupSocket={setupSocket} />}
+                exact
+              />
               <PrivateRoute exact path='/friends' component={Profiles} />
-              <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <PrivateRoute
+                exact
+                path='/dashboard'
+                socket={socket}
+                component={Dashboard}
+              />
               <PrivateRoute
                 path='/poll-details'
                 exact
