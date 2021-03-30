@@ -81,6 +81,52 @@ router.post(
   }
 );
 
+//@route PUT api/polls/update
+//@desc Update poll info
+//@access Private
+
+router.post('/update', auth, async (req, res) => {
+  try {
+    const poll = await Poll.findOneAndUpdate(
+      { _id: req.body.pollId },
+      {
+        $set: {
+          question: req.body.question,
+          friendsList: req.body.friendsList,
+        },
+      },
+      { new: true }
+    );
+    res.json(poll);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//@route DELETE api/polls
+//@desc Delete category
+//@access Private
+
+router.delete('/', auth, async (req, res) => {
+  try {
+    const poll = await Poll.findOneAndDelete({
+      _id: req.body.pollId,
+    });
+
+    await Profile.findOneAndUpdate(
+      { user: req.user.id },
+      { $pull: { polls: req.body.pollId } },
+      { new: true }
+    );
+
+    res.json(poll);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 //@route GET api/polls
 //@desc Get all polls
 //@access Private

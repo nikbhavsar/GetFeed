@@ -10,6 +10,27 @@ const config = require('../../config/keys');
 const auth = require('../../middleware/auth');
 const User = require('../../modals/User');
 
+//@route GET api/auth/:user_id
+//@desc get user by id
+//@access Private
+router.get('/:user_id', auth, async (req, res) => {
+  try {
+    const user = await User.findOne({
+      _id: req.params.user_id,
+    });
+    if (!user) {
+      return res.status(400).json({ msg: 'User not found.' });
+    }
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == 'ObjectId') {
+      return res.status(400).json({ msg: 'User not found.' });
+    }
+    res.status(500).send('Server Error');
+  }
+});
+
 //@route GET api/auth
 //@desc
 //@access public

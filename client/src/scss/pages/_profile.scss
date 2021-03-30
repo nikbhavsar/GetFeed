@@ -1,33 +1,79 @@
-.profile-item{
+.profile-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: rgb(224, 221, 221) solid 1px;
 }
-.follow-button{
 
-  background-color: #90C48A;
+.avatar-name-section {
+  display: flex;
+}
+.follow-button {
+  background-color: #90c48a;
   color: white;
-  border:none;
+  border: none;
   margin: 0.7rem;
   padding: 10px 20px;
-  
 }
 
-.unfollow-button{
-
-  background-color: #D77876;
+.unfollow-button {
+  background-color: #d77876;
   color: white;
-  border:none;
+  border: none;
   margin: 0.7rem;
   padding: 10px 20px;
-
 }
 
-.MuiTab-textColorPrimary.Mui-selected{
+.MuiTab-textColorPrimary.Mui-selected {
   color: rgb(20, 20, 20) !important;
 }
 
-.MuiTab-textColorPrimary{
-  color:rgb(40, 51, 51) !important;
+.MuiTab-textColorPrimary {
+  color: rgb(40, 51, 51) !important;
+}
+
+//public profile styles
+
+.public-profile-section {
+  margin: auto;
+  height: 100vh;
+  padding: 0 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: #f7f7f8;
+}
+
+.user-info {
+  padding: 2rem;
+  display: flex;
+}
+
+.public-profile-avatar {
+  height: 7rem !important;
+  width: 7rem !important;
+}
+
+.user-info__details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info__detais__name {
+  font-size: 2rem;
+  padding: 0.5rem;
+  color: #424141;
+}
+
+.user-info__detais__followers-following {
+  display: flex;
+  text-transform: uppercase;
+}
+
+.user-info__detais__followers,
+.user-info__detais__following {
+  padding: 0.5rem;
+  color: #7e7e7e;
+  font-weight: lighter;
 }

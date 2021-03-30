@@ -5,6 +5,7 @@ import {
   ADD_POLL,
   GET_FOLLOWING_POLL,
   UPDATE_LIKES,
+  UPDATE_POLL,
 } from '../actions/types';
 
 const initialState = {
@@ -24,6 +25,20 @@ export default function (state = initialState, action) {
       return {
         ...state,
         poll: payload,
+        loading: false,
+      };
+    case UPDATE_POLL:
+      return {
+        ...state,
+        polls: state.polls.map((poll) =>
+          poll._id === payload.id
+            ? {
+                ...poll,
+                question: payload.question,
+                friendsList: payload.friendsList,
+              }
+            : poll
+        ),
         loading: false,
       };
     case GET_POLLS:

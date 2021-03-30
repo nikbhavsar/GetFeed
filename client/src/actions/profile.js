@@ -6,6 +6,7 @@ import {
   GET_PROFILE,
   GET_PROFILES,
   PROFILE_ERROR,
+  UPDATE_PROFILE,
   CLEAR_PROFILE,
   FOLLOW,
   UNFOLLOW,
@@ -185,6 +186,33 @@ export const createProfile = () => async (dispatch) => {
     if (errors) {
       errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
     }
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+//update profile pic
+
+export const updateAvatar = (avatar) => async (dispatch, getState) => {
+  const body = {
+    avatar: avatar,
+  };
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const res = await axios.put('/api/profile/update-avatar', body, config);
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.error(err);
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },

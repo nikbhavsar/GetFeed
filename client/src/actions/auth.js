@@ -5,6 +5,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
+  GET_USER,
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -12,6 +13,21 @@ import {
 } from './types';
 
 import { createProfile } from './profile';
+
+//Get user by Id
+export const getUserById = (userId) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/auth/${userId}`);
+    dispatch({
+      type: GET_USER,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR,
+    });
+  }
+};
 
 //Load user
 

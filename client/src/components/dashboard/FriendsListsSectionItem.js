@@ -9,6 +9,7 @@ import {
 } from '../../actions/category';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import ClearIcon from '@material-ui/icons/Clear';
+import Avatar from '@material-ui/core/Avatar';
 
 const FriendsListsSectionItem = ({
   category_id,
@@ -75,12 +76,17 @@ const FriendsListsSectionItem = ({
         </div>
       </div>
       <div className='friends-list'>
-        {friends.map((friend) => {
+        {friends.map((friend, index) => {
           return (
-            <div className='friends-list_list-item'>
+            <div key={index} className='friends-list_list-item'>
               <ClearIcon
                 onClick={() => handleDelete(friend)}
                 className='clear-icon'
+              />
+              <Avatar
+                alt={friend.user.name}
+                src={`https://res.cloudinary.com/daqdhcvyv/image/upload/v1615793443/${friend.avatar}`}
+                className='user-avtar'
               />
               <div className='friends-list_list-item__name'>
                 {friend.user.name}

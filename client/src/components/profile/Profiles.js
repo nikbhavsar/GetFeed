@@ -21,7 +21,7 @@ const Profiles = ({
         )
       );
     }
-  }, [getProfiles]);
+  }, [getProfiles, getCurrentProfile]);
 
   return loading || profiles === [] || profile === null ? (
     <Spinner />

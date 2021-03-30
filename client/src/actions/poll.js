@@ -8,6 +8,8 @@ import {
   ADD_POLL,
   UPDATE_PROFILE,
   UPDATE_LIKES,
+  DELETE_POLL,
+  UPDATE_POLL,
 } from './types';
 
 //Get Polls
@@ -53,6 +55,7 @@ export const createPoll = (question, image1, image2, friendsList) => async (
       type: ADD_POLL,
       payload: res.data,
     });
+    //Adding poll Id to profile's array
     const pollItems = [...profile.polls, res.data._id];
     dispatch({
       type: UPDATE_PROFILE,
@@ -66,7 +69,69 @@ export const createPoll = (question, image1, image2, friendsList) => async (
   }
 };
 
-// GET category by id
+//Update Poll
+export const updatePoll = (id, question, friendsList) => async (dispatch) => {
+  const body = {
+    pollId: id,
+    question: question,
+    friendsList: friendsList,
+  };
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const res = await axios.post('/api/polls/update', body, config);
+
+    console.log(res);
+    dispatch({
+      type: UPDATE_POLL,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: POLL_ERROR,
+    });
+  }
+};
+
+//Delete poll
+
+export const deletePoll = (pollId) => async (dispatch, getState) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: {
+      pollId: pollId,
+    },
+  };
+
+  try {
+    const res = await axios.delete('/api/polls', config);
+    const { profile } = getState().profile;
+    dispatch({
+      type: DELETE_POLL,
+      payload: res.data,
+    });
+    const pollItems = profile.polls.filter((poll) => poll !== res.data._id);
+    console.log(pollItems);
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: { ...profile, polls: pollItems },
+    });
+  } catch (err) {
+    console.error(err);
+    dispatch({
+      type: POLL_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// GET poll by id
 export const getPollById = (pollId) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/polls/${pollId}`);

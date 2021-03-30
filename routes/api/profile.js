@@ -2,9 +2,22 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
+const { cloudinary } = require('../../config/cloudinary');
 
 const Profile = require('../../modals/Profile');
 const User = require('../../modals/User');
+
+const uploadImage = async (imageFile) => {
+  try {
+    const uploadResponse = await cloudinary.uploader.upload(imageFile, {
+      upload_preset: 'get-feed',
+    });
+    return uploadResponse;
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ err: 'Something went wrong' });
+  }
+};
 
 //@route GET api/profile/me
 //@desc Get current user profile
@@ -170,6 +183,28 @@ router.put('/unfollow', auth, async (req, res) => {
     const profile = await Profile.findOneAndUpdate(
       { user: req.user.id },
       { $pull: { following: req.body.personToUnFollowId } },
+      { new: true }
+    );
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//@route PUT api/update-avatar
+//Update user avatar
+//@access Private
+
+router.put('/update-avatar', auth, async (req, res) => {
+  try {
+    const image = await uploadImage(req.body.avatar);
+
+    const profile = await Profile.findOneAndUpdate(
+      { user: req.user.id },
+      {
+        avatar: `https://res.cloudinary.com/daqdhcvyv/image/upload/v1615793443/${image.public_id}`,
+      },
       { new: true }
     );
     res.json(profile);

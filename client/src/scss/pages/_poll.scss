@@ -83,6 +83,16 @@ input[type='file'] {
 }
 
 //PollItem styles
+.edit-remove-section {
+  text-align: right;
+
+  .setting-icon {
+    font-size: $md-font !important;
+  }
+}
+.delete-icon {
+  color: rgb(222, 216, 216);
+}
 .poll-item__question {
   font-size: $md-font;
   font-weight: bold;
@@ -99,6 +109,7 @@ input[type='file'] {
 .poll-item {
   padding: $md-font;
   text-align: center;
+  cursor: pointer;
 }
 
 .poll-item__images {
@@ -133,12 +144,9 @@ input[type='file'] {
 }
 
 //Friends poll styles
-.poll-list-body {
-  background: rgb(255, 254, 254);
-}
 
 .poll-list-container {
-  width: 400px;
+  width: 50%;
   margin: auto;
 }
 
@@ -173,4 +181,49 @@ input[type='file'] {
 
 .poll-item-friends {
   border-radius: 5px;
+}
+
+//User vote item styles
+
+.user-vote-item-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.details-section {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  justify-content: center;
+}
+
+.details-section-margin {
+  margin-left: 10px;
+}
+
+.user-info {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.time-info {
+  font-size: $sm-font;
+  font-weight: lighter;
+  color: rgb(156, 154, 154);
+}
+
+.poll-item-details__images {
+  display: flex;
+}
+
+.not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $lg-font;
+  color: rgb(165, 164, 164);
+  font-weight: bold;
 }

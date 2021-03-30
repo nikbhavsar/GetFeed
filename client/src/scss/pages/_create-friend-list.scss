@@ -126,10 +126,11 @@
   cursor: pointer;
   font-size: $sm-font !important;
   padding-left: $sm-font;
+  padding-right: $sm-font;
 }
 
 .friends-list_list-item__name {
-  padding: 10px 1rem;
+  padding: 10px 0rem;
   font-size: 0.9rem;
   font-weight: bold;
 }
