@@ -8,7 +8,7 @@
   width: 100%;
   flex-wrap: wrap;
   min-height: 4.5rem;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: #fff;
   color: #333;
@@ -41,6 +41,7 @@
   margin-left: 1rem;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .create-poll {
@@ -74,6 +75,12 @@
   display: inline-block;
   background: transparent;
   border: none;
+}
+
+.navbarLinks li {
+  .create-poll {
+    border: rgba(140, 136, 136, 0.26) solid 1px;
+  }
 }
 
 .navbarLinks li button:hover {
@@ -144,7 +151,16 @@
 .create-poll {
   display: inline-block;
 }
+.avatar-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.avatar-section__user-name {
+  padding: $sm-font;
+  font-weight: bold;
+}
 .avtar {
   margin-right: 2rem;
 }

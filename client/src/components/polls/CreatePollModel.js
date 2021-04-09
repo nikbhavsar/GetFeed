@@ -23,6 +23,7 @@ const CreatePollModel = ({
 
   //Image value
   const [fileInputState, setFileInputState] = useState('');
+  const [imageInputText, setImageInputText] = useState('Select two images');
   const setImages = useRef([]);
 
   useEffect(() => {
@@ -46,6 +47,11 @@ const CreatePollModel = ({
 
     reader.onloadend = () => {
       setImages.current = [...setImages.current, reader.result];
+      if (setImages.current.length === 2) {
+        setImageInputText('You are all set to create poll.');
+      } else if (setImages.current.length === 1) {
+        setImageInputText('Upload one more image and you are all set.');
+      }
       console.log(setImages.current);
     };
   };
@@ -124,7 +130,7 @@ const CreatePollModel = ({
                       className='image-input'
                     />
                     <CloudUploadIcon className='cloud-icon' />
-                    Select two images
+                    {imageInputText}
                   </label>
                 </div>
               </div>

@@ -10,6 +10,7 @@ import Popper from '@material-ui/core/Popper';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import FriendsModal from './FriendsModal';
+import CreatePollModel from '../polls/CreatePollModel';
 import { getCurrentProfile } from '../../actions/profile';
 import UpdateProfileModal from '../profile/UpdatePeofileModal';
 
@@ -25,6 +26,7 @@ const Navbar = ({
   const [open, setOpen] = React.useState(false);
   const [modalOpen, setModalOpen] = React.useState(false);
   const [updateModalOpen, setUpdateModalOpen] = React.useState(false);
+  const [pollModalOpen, setPollModalOpen] = React.useState(false);
 
   const anchorRef = React.useRef(null);
 
@@ -81,6 +83,12 @@ const Navbar = ({
     setUpdateModalOpen(true);
   };
 
+  //Create Poll Modal Open and Click function
+
+  const handleCreatePollButtonClickOpen = () => {
+    setPollModalOpen(true);
+  };
+
   if (isAuthenticated) {
     return (
       <div className='nav-container'>
@@ -106,64 +114,72 @@ const Navbar = ({
               </li>
 
               <li onClick={(e) => handleClick(e)}>
-                <a className='round-button create-poll'>Create Poll</a>
-              </li>
-              <li onClick={(e) => handleClick(e)}>
-                <Avatar
-                  alt={user.name}
-                  src={image}
-                  ref={anchorRef}
-                  className='avtar'
-                  aria-controls={open ? 'menu-list-grow' : undefined}
-                  aria-haspopup='true'
-                  onClick={handleToggle}
-                />
-                <Popper
-                  open={open}
-                  anchorEl={anchorRef.current}
-                  role={undefined}
-                  transition
-                  disablePortal>
-                  {({ TransitionProps, placement }) => (
-                    <Grow
-                      {...TransitionProps}
-                      style={{
-                        transformOrigin:
-                          placement === 'bottom'
-                            ? 'center top'
-                            : 'center bottom',
-                      }}>
-                      <Paper>
-                        <ClickAwayListener onClickAway={handleClose}>
-                          <MenuList
-                            autoFocusItem={open}
-                            id='menu-list-grow'
-                            onKeyDown={handleListKeyDown}>
-                            <MenuItem onClick={handleUpdateButtonClickOpen}>
-                              My account
-                            </MenuItem>
-                            <MenuItem
-                              onClick={() => {
-                                handleClick();
-
-                                if (socket) {
-                                  socket.emit('logout');
-                                } else {
-                                  setTimeout(socket.emit('logout'), 2000);
-                                }
-
-                                logout();
-                              }}>
-                              Logout
-                            </MenuItem>
-                          </MenuList>
-                        </ClickAwayListener>
-                      </Paper>
-                    </Grow>
-                  )}
-                </Popper>
+                <button
+                  className='round-button create-poll'
+                  onClick={handleCreatePollButtonClickOpen}>
+                  Create Poll
+                </button>
               </li>
             </ul>
+          </div>
+
+          <div className='avatar-section'>
+            <div className='avatar-section__user-name'>{user.name}</div>
+            <div>
+              <Avatar
+                alt={user.name}
+                src={image}
+                ref={anchorRef}
+                className='avtar '
+                aria-controls={open ? 'menu-list-grow' : undefined}
+                aria-haspopup='true'
+                onClick={handleToggle}
+              />
+              <Popper
+                open={open}
+                anchorEl={anchorRef.current}
+                role={undefined}
+                transition
+                disablePortal>
+                {({ TransitionProps, placement }) => (
+                  <Grow
+                    {...TransitionProps}
+                    style={{
+                      transformOrigin:
+                        placement === 'bottom' ? 'center top' : 'center bottom',
+                    }}>
+                    <Paper>
+                      <ClickAwayListener onClickAway={handleClose}>
+                        <MenuList
+                          autoFocusItem={open}
+                          id='menu-list-grow'
+                          onKeyDown={handleListKeyDown}>
+                          <MenuItem onClick={handleUpdateButtonClickOpen}>
+                            Update Avatar
+                          </MenuItem>
+                          <MenuItem
+                            onClick={() => {
+                              handleClick();
+
+                              if (socket) {
+                                socket.emit('logout');
+                                socket.disconnect();
+                              } else {
+                                setTimeout(socket.emit('logout'), 2000);
+                                socket.disconnect();
+                              }
+
+                              logout();
+                            }}>
+                            Logout
+                          </MenuItem>
+                        </MenuList>
+                      </ClickAwayListener>
+                    </Paper>
+                  </Grow>
+                )}
+              </Popper>
+            </div>
           </div>
         </nav>
         <FriendsModal open={modalOpen} onClose={handleModalClose} />
@@ -171,6 +187,13 @@ const Navbar = ({
           open={updateModalOpen}
           handleClose={() => {
             setUpdateModalOpen(false);
+            handleClick();
+          }}
+        />
+        <CreatePollModel
+          open={pollModalOpen}
+          onClose={() => {
+            setPollModalOpen(false);
             handleClick();
           }}
         />

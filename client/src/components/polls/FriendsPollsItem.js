@@ -4,12 +4,20 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { connect } from 'react-redux';
 import { addLike, unLike, getFollowingPoll } from '../../actions/poll';
 import Spinner from '../layout/Spinner';
+import Avatar from '@material-ui/core/Avatar';
 
 const FriendsPollsItem = ({ pollData, onClick, auth, addLike, unLike }) => {
   return pollData ? (
     <>
       <div className='poll-card-container'>
-        <div className='user-info'>{pollData.name}</div>
+        <div className='user-info-poll'>
+          <Avatar
+            alt={pollData.name}
+            src={pollData.avatar}
+            className='user-avtar'
+          />
+          {pollData.name}
+        </div>
         <div className='category-container poll-item poll-item-friends'>
           <div className='poll-item__question'>{pollData.question}</div>
           <div className='poll-item__friends-list'>

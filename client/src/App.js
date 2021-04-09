@@ -92,6 +92,7 @@ const App = () => {
               <PrivateRoute
                 exact
                 path='/friends-polls'
+                socket={socket}
                 component={FriendsPolls}
               />
               <PrivateRoute path='/profile' exact component={PublicProfile} />

@@ -16,7 +16,7 @@ const ProfileItem = ({
     <div className='profile bg-light'>
       <div className='profile-item'>
         <div className='avatar-name-section'>
-          <Avatar alt={name} src={avatar} className='user-avtar' />
+          <Avatar alt='name' src={avatar} className='user-avtar' />
           {name}
         </div>
 

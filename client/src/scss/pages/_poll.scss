@@ -151,13 +151,7 @@ input[type='file'] {
 }
 
 .poll-card-container {
-  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
-  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
-  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.63);
-  padding: $sm-font;
-  margin: $md-font;
-  border-radius: 10px;
-  background: rgb(241, 241, 241);
+  margin: $sm-font;
 }
 
 .poll-item__images__image-div-friends-poll {
@@ -175,8 +169,17 @@ input[type='file'] {
   color: rgb(201, 54, 54);
   font-size: $lg-font !important;
 }
-.user-info {
+.user-info-poll {
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  font-size: $md-font;
+
+  .user-avtar {
+    height: 3rem !important;
+    width: 3rem !important;
+    margin-right: 1rem;
+  }
 }
 
 .poll-item-friends {

@@ -7,6 +7,7 @@ import { v4 as uuid } from 'uuid';
 import FriendsSection from '../dashboard/FriendsSection';
 
 const FriendsPolls = ({
+  socket,
   getFollowingPoll,
   poll: { loading, followingPolls },
 }) => {
@@ -18,30 +19,44 @@ const FriendsPolls = ({
   }, [count]);
 
   useEffect(() => {
+    if (socket) {
+      socket.emit('login');
+    } else {
+      setTimeout(socket.emit('login'), 2000);
+    }
+  }, [socket]);
+
+  useEffect(() => {
     if (followingPolls) setFriendsPolls(followingPolls);
   }, [followingPolls]);
 
   const increment = () => {
     setCount((prevCount) => !prevCount);
   };
-  return !loading && friendsPolls.length ? (
+  return !loading ? (
     <div className='dashboard'>
       <div className='friends-section'>
-        <FriendsSection />
+        <FriendsSection socket={socket} />
       </div>
-      <div className='friends-list-poll-section'>
-        <div className='poll-list-body'>
-          <div className='poll-list-container'>
-            {friendsPolls.map((poll) => (
-              <FriendsPollsItem
-                key={uuid()}
-                pollData={poll}
-                onClick={increment}
-              />
-            ))}
+      {friendsPolls.length ? (
+        <div className='friends-list-poll-section'>
+          <div className='poll-list-body'>
+            <div className='poll-list-container'>
+              {friendsPolls.map((poll) => (
+                <FriendsPollsItem
+                  key={uuid()}
+                  pollData={poll}
+                  onClick={increment}
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className='friends-list-poll-section not-found'>
+          No polls found.
+        </div>
+      )}
     </div>
   ) : (
     <Spinner />
